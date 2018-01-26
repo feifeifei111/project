@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zf.dao.ResumeMapper">
+
+    <insert id="add">
+        insert into resume (birthplace, birthday, nation, politicalstatus, healthy, marriage, education, major, school, competence, experience, award, selfcomment, hobbyorspeciality, state, userid, postid, createtime)
+        values (#{birthPlace},#{birthday},#{nation},#{politicalStatus},#{healthy},#{marriage},#{education},#{major},#{school},#{competence},#{experience},#{award},#{selfComment},#{hobbyOrSpeciality},#{state},#{user.id},#{postId},#{createTime});
+    </insert>
+    <update id="update">
+        update resume set birthplace = #{birthPlace},birthday=#{birthday},nation=#{nation},politicalstatus=#{politicalStatus},healthy=#{healthy},marriage=#{marriage},education=#{education},major=#{major},school=#{school},competence=#{competence},experience=#{experience},award=#{award},selfcomment=#{selfComment},hobbyOrSpeciality=#{hobbyOrSpeciality},state=#{state},userid=#{user.id},postid=#{post.id},createTime=#{createTime} where id=#{id};
+    </update>
+    <select id="queryUserId" resultType="com.zf.model.Resume"></select>
+</mapper>
