@@ -5,6 +5,8 @@ import java.util.Date;
 
 public class Resume implements Serializable {
     private int id;
+    private String name;
+    private String sex;
     private String birthPlace;
     private String birthday;
     private String nation;
@@ -12,23 +14,28 @@ public class Resume implements Serializable {
     private String healthy;
     private String marriage;
     private String education;
+    private String phone;
+    private String email;
     private String major;
     private String school;
     private String competence;
+    private String post;
     private String experience;
     private String award;
     private String selfComment;
     private String hobbyOrSpeciality;
     private int state;
-    private User user;
-    private Post post;
+    private int userId;
+    private int recruitId;
     private Date createTime;
 
     public Resume() {
     }
 
-    public Resume(int id, String birthPlace, String birthday, String nation, String politicalStatus, String healthy, String marriage, String education, String major, String school, String competence, String experience, String award, String selfComment, String hobbyOrSpeciality, int state, User user, Post post, Date createTime) {
+    public Resume(int id, String name, String sex, String birthPlace, String birthday, String nation, String politicalStatus, String healthy, String marriage, String education, String phone, String email, String major, String school, String competence, String post, String experience, String award, String selfComment, String hobbyOrSpeciality, int state, int userId, int recruitId, Date createTime) {
         this.id = id;
+        this.name = name;
+        this.sex = sex;
         this.birthPlace = birthPlace;
         this.birthday = birthday;
         this.nation = nation;
@@ -36,17 +43,36 @@ public class Resume implements Serializable {
         this.healthy = healthy;
         this.marriage = marriage;
         this.education = education;
+        this.phone = phone;
+        this.email = email;
         this.major = major;
         this.school = school;
         this.competence = competence;
+        this.post = post;
         this.experience = experience;
         this.award = award;
         this.selfComment = selfComment;
         this.hobbyOrSpeciality = hobbyOrSpeciality;
         this.state = state;
-        this.user = user;
-        this.post = post;
+        this.userId = userId;
+        this.recruitId = recruitId;
         this.createTime = createTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public int getId() {
@@ -113,6 +139,22 @@ public class Resume implements Serializable {
         this.education = education;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getMajor() {
         return major;
     }
@@ -177,20 +219,28 @@ public class Resume implements Serializable {
         this.state = state;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Post getPost() {
+    public String getPost() {
         return post;
     }
 
-    public void setPost(Post post) {
+    public void setPost(String post) {
         this.post = post;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getRecruitId() {
+        return recruitId;
+    }
+
+    public void setRecruitId(int recruitId) {
+        this.recruitId = recruitId;
     }
 
     public Date getCreateTime() {
@@ -205,6 +255,8 @@ public class Resume implements Serializable {
     public String toString() {
         return "Resume{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
                 ", birthPlace='" + birthPlace + '\'' +
                 ", birthday='" + birthday + '\'' +
                 ", nation='" + nation + '\'' +
@@ -212,16 +264,19 @@ public class Resume implements Serializable {
                 ", healthy='" + healthy + '\'' +
                 ", marriage='" + marriage + '\'' +
                 ", education='" + education + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", major='" + major + '\'' +
                 ", school='" + school + '\'' +
                 ", competence='" + competence + '\'' +
+                ", post='" + post + '\'' +
                 ", experience='" + experience + '\'' +
                 ", award='" + award + '\'' +
                 ", selfComment='" + selfComment + '\'' +
                 ", hobbyOrSpeciality='" + hobbyOrSpeciality + '\'' +
                 ", state=" + state +
-                ", user=" + user +
-                ", post=" + post +
+                ", userId=" + userId +
+                ", recruitId=" + recruitId +
                 ", createTime=" + createTime +
                 '}';
     }

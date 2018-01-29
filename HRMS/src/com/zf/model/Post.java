@@ -6,17 +6,17 @@ import java.util.Date;
 public class Post implements Serializable {
     private int id;
     private String name;
-    private Dept dept;
+    private int deptId;
     private String description;
     private Date createTime;
 
     public Post() {
     }
 
-    public Post(int id, String name, Dept dept, String description, Date createTime) {
+    public Post(int id, String name, int deptId, String description, Date createTime) {
         this.id = id;
         this.name = name;
-        this.dept = dept;
+        this.deptId = deptId;
         this.description = description;
         this.createTime = createTime;
     }
@@ -37,12 +37,12 @@ public class Post implements Serializable {
         this.name = name;
     }
 
-    public Dept getDept() {
-        return dept;
+    public int getDeptId() {
+        return deptId;
     }
 
-    public void setDept(Dept dept) {
-        this.dept = dept;
+    public void setDeptId(int deptId) {
+        this.deptId = deptId;
     }
 
     public String getDescription() {
@@ -66,7 +66,7 @@ public class Post implements Serializable {
         return "Post{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", dept=" + dept +
+                ", deptId=" + deptId +
                 ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 '}';

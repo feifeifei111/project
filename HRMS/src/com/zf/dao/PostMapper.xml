@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.PostMapper">
 
+    <insert id="add">
+        insert into post (name, deptid, description, createtime) values (#{name},#{deptId},#{description},#{createTime});
+    </insert>
+    <select id="queryById" resultType="com.zf.model.Post">
+        select * from post where id=#{id};
+    </select>
+    <select id="queryAll" resultType="com.zf.model.Post">
+        select * from post;
+    </select>
 </mapper>

@@ -5,11 +5,22 @@
 <mapper namespace="com.zf.dao.ResumeMapper">
 
     <insert id="add">
-        insert into resume (birthplace, birthday, nation, politicalstatus, healthy, marriage, education, major, school, competence, experience, award, selfcomment, hobbyorspeciality, state, userid, postid, createtime)
-        values (#{birthPlace},#{birthday},#{nation},#{politicalStatus},#{healthy},#{marriage},#{education},#{major},#{school},#{competence},#{experience},#{award},#{selfComment},#{hobbyOrSpeciality},#{state},#{user.id},#{postId},#{createTime});
+        insert into resume (name,sex,birthplace, birthday, nation, politicalstatus, healthy, marriage, education,phone,email, major, school, competence,post,experience, award, selfcomment, hobbyorspeciality, state, userid, recruitid,createtime)
+        values (#{name},#{sex},#{birthPlace},#{birthday},#{nation},#{politicalStatus},#{healthy},#{marriage},#{education},#{phone},#{email}, #{major},#{school},#{competence},#{post},#{experience},#{award},#{selfComment},#{hobbyOrSpeciality},#{state},#{userId},#{recruitId},#{createTime});
     </insert>
     <update id="update">
-        update resume set birthplace = #{birthPlace},birthday=#{birthday},nation=#{nation},politicalstatus=#{politicalStatus},healthy=#{healthy},marriage=#{marriage},education=#{education},major=#{major},school=#{school},competence=#{competence},experience=#{experience},award=#{award},selfcomment=#{selfComment},hobbyOrSpeciality=#{hobbyOrSpeciality},state=#{state},userid=#{user.id},postid=#{post.id},createTime=#{createTime} where id=#{id};
+        update resume set name=#{name},sex=#{sex},birthplace = #{birthPlace},birthday=#{birthday},nation=#{nation},politicalstatus=#{politicalStatus},healthy=#{healthy},marriage=#{marriage},education=#{education},phone=#{phone},email=#{email}, major=#{major},school=#{school},competence=#{competence},post=#{post},experience=#{experience},award=#{award},selfcomment=#{selfComment},hobbyOrSpeciality=#{hobbyOrSpeciality},state=#{state},userid=#{userId},recruitId=#{recruitId},createTime=#{createTime} where id=#{id};
     </update>
-    <select id="queryUserId" resultType="com.zf.model.Resume"></select>
+    <select id="queryUserId" resultType="com.zf.model.Resume">
+        select * from resume where userid=#{userId};
+    </select>
+    <select id="queryById" resultType="com.zf.model.Resume">
+        select * from resume where id=#{id};
+    </select>
+    <select id="queryAll" resultType="com.zf.model.Resume">
+        select * from resume where state!=0;
+    </select>
+    <select id="queryPage" resultType="com.zf.model.Resume">
+        select * from resume where state!=0 limit #{0},#{1};
+    </select>
 </mapper>

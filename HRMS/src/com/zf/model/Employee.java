@@ -6,20 +6,20 @@ import java.util.Date;
 public class Employee implements Serializable {
     private int id;
     private int state;
-    private Post post;
-    private User user;
-    private Train train;
+    private int postId;
+    private int userId;
+    private int trainId;
     private Date createTime;
 
     public Employee() {
     }
 
-    public Employee(int id, int state, Post post, User user, Train train, Date createTime) {
+    public Employee(int id, int state, int postId, int userId, int trainId, Date createTime) {
         this.id = id;
         this.state = state;
-        this.post = post;
-        this.user = user;
-        this.train = train;
+        this.postId = postId;
+        this.userId = userId;
+        this.trainId = trainId;
         this.createTime = createTime;
     }
 
@@ -39,28 +39,28 @@ public class Employee implements Serializable {
         this.state = state;
     }
 
-    public Post getPost() {
-        return post;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Train getTrain() {
-        return train;
+    public int getTrainId() {
+        return trainId;
     }
 
-    public void setTrain(Train train) {
-        this.train = train;
+    public void setTrainId(int trainId) {
+        this.trainId = trainId;
     }
 
     public Date getCreateTime() {
@@ -76,9 +76,9 @@ public class Employee implements Serializable {
         return "Employee{" +
                 "id=" + id +
                 ", state=" + state +
-                ", post=" + post +
-                ", user=" + user +
-                ", train=" + train +
+                ", postId=" + postId +
+                ", userId=" + userId +
+                ", trainId=" + trainId +
                 ", createTime=" + createTime +
                 '}';
     }

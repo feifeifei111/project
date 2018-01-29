@@ -5,8 +5,9 @@ import java.util.Date;
 
 public class Recruit implements Serializable{
     private int id;
-    private Post post;
-    private String description;
+    private int postId;
+    private String requirement;
+    private String salaryRange;
     private String address;
     private int state;
     private Date createTime;
@@ -14,10 +15,11 @@ public class Recruit implements Serializable{
     public Recruit() {
     }
 
-    public Recruit(int id, Post post, String description, String address, int state, Date createTime) {
+    public Recruit(int id, int postId, String requirement, String salaryRange, String address, int state, Date createTime) {
         this.id = id;
-        this.post = post;
-        this.description = description;
+        this.postId = postId;
+        this.requirement = requirement;
+        this.salaryRange = salaryRange;
         this.address = address;
         this.state = state;
         this.createTime = createTime;
@@ -31,20 +33,28 @@ public class Recruit implements Serializable{
         this.id = id;
     }
 
-    public Post getPost() {
-        return post;
+    public int getPostId() {
+        return postId;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setPostId(int postId) {
+        this.postId = postId;
     }
 
-    public String getDescription() {
-        return description;
+    public String getRequirement() {
+        return requirement;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getSalaryRange() {
+        return salaryRange;
+    }
+
+    public void setSalaryRange(String salaryRange) {
+        this.salaryRange = salaryRange;
     }
 
     public String getAddress() {
@@ -75,8 +85,9 @@ public class Recruit implements Serializable{
     public String toString() {
         return "Recruit{" +
                 "id=" + id +
-                ", post=" + post+
-                ", description='" + description + '\'' +
+                ", postId=" + postId +
+                ", requirement='" + requirement + '\'' +
+                ", salaryRange='" + salaryRange + '\'' +
                 ", address='" + address + '\'' +
                 ", state=" + state +
                 ", createTime=" + createTime +

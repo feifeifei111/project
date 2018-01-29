@@ -15,7 +15,7 @@
     <base href="<%=basePath%>"/>
     <title></title>
     <script src="js/jquery-3.1.0.js"></script>
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../../css/style.css">
     <script>
         $(function () {
             $("#f_tags").blur(function () {

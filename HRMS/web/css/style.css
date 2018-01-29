@@ -51,6 +51,12 @@ h1 {
 	font-size: 40px;
 	margin-top: 75px;
 }
+.d1{
+	margin: auto;
+	padding: auto;
+	width: 300px;
+	text-align: left;
+}
 
 .container {
 	width: 32%;
