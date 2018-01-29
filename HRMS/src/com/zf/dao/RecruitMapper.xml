@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.RecruitMapper">
     <insert id="add">
-        insert into recruit (postid, requirement, salaryrange, address, state, createtime)
-        values (#{postId},#{requirement},#{salaryRange},#{address},#{state},#{createTime});
+        insert into recruit (postid, requirement, salaryrange,introduction, address, state, createtime)
+        values (#{postId},#{requirement},#{salaryRange},#{introduction},#{address},#{state},#{createTime});
     </insert>
 
     <select id="queryAll" resultType="com.zf.model.Recruit">

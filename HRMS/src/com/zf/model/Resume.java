@@ -28,11 +28,12 @@ public class Resume implements Serializable {
     private int userId;
     private int recruitId;
     private Date createTime;
+    private String interviewTime;
 
     public Resume() {
     }
 
-    public Resume(int id, String name, String sex, String birthPlace, String birthday, String nation, String politicalStatus, String healthy, String marriage, String education, String phone, String email, String major, String school, String competence, String post, String experience, String award, String selfComment, String hobbyOrSpeciality, int state, int userId, int recruitId, Date createTime) {
+    public Resume(int id, String name, String sex, String birthPlace, String birthday, String nation, String politicalStatus, String healthy, String marriage, String education, String phone, String email, String major, String school, String competence, String post, String experience, String award, String selfComment, String hobbyOrSpeciality, int state, int userId, int recruitId, Date createTime, String interviewTime) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -57,6 +58,7 @@ public class Resume implements Serializable {
         this.userId = userId;
         this.recruitId = recruitId;
         this.createTime = createTime;
+        this.interviewTime = interviewTime;
     }
 
     public String getName() {
@@ -251,6 +253,14 @@ public class Resume implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getInterviewTime() {
+        return interviewTime;
+    }
+
+    public void setInterviewTime(String interviewTime) {
+        this.interviewTime = interviewTime;
+    }
+
     @Override
     public String toString() {
         return "Resume{" +
@@ -278,6 +288,7 @@ public class Resume implements Serializable {
                 ", userId=" + userId +
                 ", recruitId=" + recruitId +
                 ", createTime=" + createTime +
+                ", interviewTime=" + interviewTime +
                 '}';
     }
 }

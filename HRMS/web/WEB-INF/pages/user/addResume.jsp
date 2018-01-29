@@ -14,114 +14,121 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        table input{
+            border: none;
+        }
+    </style>
 </head>
 <body>
 <form action="addResume" method="post" >
-    <table>
+    <table border="1" cellspacing="0" >
         <tr>
             <th colspan="7">个人简历</th>
         </tr>
         <tr>
-            <td>姓名</td>
+            <td align="center">姓名</td>
             <td>
-                <input type="text" name="name">
+                <input type="text" name="name" required>
             </td>
-            <td>性别</td>
+            <td align="center">性别</td>
             <td>
-                <input type="text" name="sex">
+                <input type="text" name="sex" required>
             </td>
-            <td>出生年月</td>
+            <td align="center">出生年月</td>
             <td>
-                <input type="text" name="birthday">
+                <input type="text" name="birthday" required>
             </td>
-            <td rowspan="5"></td>
+            <td rowspan="5" width="100"></td>
         </tr>
         <tr>
-            <td>籍贯</td>
+            <td align="center">籍贯</td>
             <td>
-                <input type="text" name="birthPlace">
+                <input type="text" name="birthPlace" required>
             </td>
-            <td>名族</td>
+            <td align="center">名族</td>
             <td>
-                <input type="text" name="nation">
+                <input type="text" name="nation" required>
             </td>
-            <td>政治面貌</td>
+            <td align="center">政治面貌</td>
             <td>
-                <input type="text" name="politicalStatus">
-            </td>
-        </tr>
-        <tr>
-            <td>身体状况</td>
-            <td>
-                <input type="text" name="healthy">
-            </td>
-            <td>婚姻状况</td>
-            <td>
-                <input type="text" name="marriage">
-            </td>
-            <td>学历</td>
-            <td>
-                <input type="text" name="education">
+                <input type="text" name="politicalStatus" required>
             </td>
         </tr>
         <tr>
-            <td>联系方式</td>
+            <td align="center">身体状况</td>
+            <td>
+                <input type="text" name="healthy" required>
+            </td>
+            <td align="center">婚姻状况</td>
+            <td>
+                <input type="text" name="marriage" required>
+            </td>
+            <td align="center">学历</td>
+            <td>
+                <input type="text" name="education" required>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">联系方式</td>
             <td colspan="2">
-                <input type="text" name="phone">
+                <input type="text" name="phone" required>
             </td>
-            <td>邮箱</td>
+            <td align="center">邮箱</td>
             <td colspan="2">
-                <input type="text" name="email">
+                <input type="text" name="email" required>
             </td>
         </tr>
         <tr>
-            <td>所学专业</td>
+            <td align="center">所学专业</td>
             <td colspan="2">
-                <input type="text" name="major">
+                <input type="text" name="major" required>
             </td>
-            <td>毕业学校</td>
+            <td align="center">毕业学校</td>
             <td colspan="2">
-                <input type="text" name="school">
+                <input type="text" name="school" required>
             </td>
         </tr>
+
         <tr>
-            <td>专业能力</td>
+            <td align="center">专业能力</td>
             <td colspan="6">
-                <input type="text" name="competence">
+                <input type="text" name="competence" required>
             </td>
         </tr>
         <tr>
-            <td>求职意向</td>
+            <td align="center">求职意向</td>
             <td colspan="6">
-                <input type="text" name="post">
+                <input type="text" name="post" required>
             </td>
         </tr>
-        <tr>
-            <td rowspan="3">实践经历</td>
-            <td rowspan="3" colspan="6">
-                <input type="text" name="experience">
-            </td>
-        </tr>
-        <tr>
-            <td rowspan="2">获奖情况</td>
-            <td rowspan="2" colspan="6">
-                <input type="text" name="award">
-            </td>
-        </tr>
-        <tr>
-            <td>爱好或特长</td>
+        <tr height="100">
+            <td align="center" >实践经历</td>
             <td colspan="6">
-                <input type="text" name="hobbyOrSpeciality">
+                <input type="text" name="experience" required>
             </td>
         </tr>
-        <tr>
-            <td rowspan="2">自我评价</td>
-            <td rowspan="2" colspan="6">
-                <input type="text" name="selfComment">
+        <tr height="50">
+            <td align="center">获奖情况</td>
+            <td colspan="6">
+                <input type="text" name="award" required>
             </td>
         </tr>
+        <tr height="50">
+            <td align="center">爱好或特长</td>
+            <td colspan="6">
+                <input type="text" name="hobbyOrSpeciality" required>
+            </td>
+        </tr>
+        <tr height="50">
+            <td align="center">自我评价</td>
+            <td colspan="6">
+                <input type="text" name="selfComment" required>
+            </td>
+        </tr>
+        <tr></tr>
         <tr>
-            <th>
+            <th colspan="7">
                 <input type="submit" value="提交">
             </th>
         </tr>

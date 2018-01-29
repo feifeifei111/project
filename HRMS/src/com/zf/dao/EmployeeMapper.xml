@@ -17,4 +17,7 @@
     <select id="queryByUserId" resultType="com.zf.model.Employee">
         select * from employee where userid=#{userId};
     </select>
+    <select id="queryByPostId" resultType="com.zf.model.Employee">
+        select * from employee where postid=#{postId};
+    </select>
 </mapper>

@@ -13,4 +13,7 @@
     <select id="queryAll" resultType="com.zf.model.Post">
         select * from post;
     </select>
+    <select id="queryByDeptId" resultType="com.zf.model.Post">
+        select * from post where deptid=#{deptId};
+    </select>
 </mapper>

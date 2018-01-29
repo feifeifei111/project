@@ -14,31 +14,30 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        form{
+            float: left;
+        }
+    </style>
 </head>
 <body>
-<form>
-    <input type="submit" value="部门">
+<form action="deptManagement" method="post">
+    <input type="submit" value="部门管理">
 </form>
 <form>
-    <input type="submit" value="职位">
+    <input type="submit" value="薪资管理">
 </form>
 <form>
-    <input type="submit" value="员工">
+    <input type="submit" value="考勤管理">
 </form>
 <form>
-    <input type="submit" value="薪资">
+    <input type="submit" value="培训管理">
 </form>
 <form>
-    <input type="submit" value="考勤">
+    <input type="submit" value="奖惩管理">
 </form>
-<form>
-    <input type="submit" value="培训">
-</form>
-<form>
-    <input type="submit" value="奖惩">
-</form>
-<form action="listResume" method="post">
-    <input type="submit" value="招聘">
+<form action="recruitPage" method="post">
+    <input type="submit" value="招聘管理">
 </form>
 </body>
 </html>

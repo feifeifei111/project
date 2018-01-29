@@ -8,4 +8,5 @@ public interface PostMapper {
     boolean add(Post post);
     Post queryById(int id);
     List<Post> queryAll();
+    List<Post> queryByDeptId(int deptId);
 }

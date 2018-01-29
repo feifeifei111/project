@@ -133,6 +133,10 @@ public class UserController {
             }
         }
     }
+    @RequestMapping("/back")
+    public String back(HttpSession session)throws Exception{
+        return "user/userSuccess";
+    }
     @RequestMapping("/addResume")
     public String addResume(Resume resume,HttpSession session)throws Exception{
         int userId= (int) session.getAttribute("userId");
@@ -172,6 +176,21 @@ public class UserController {
         resume1.setSelfComment(resume.getSelfComment());
         resume1.setHobbyOrSpeciality(resume.getHobbyOrSpeciality());
         resumeService.update(resume1);
+        return "user/userSuccess";
+    }
+    @RequestMapping("/process")
+    public String process(HttpSession session)throws Exception{
+        int userId= (int) session.getAttribute("userId");
+        Resume resume=resumeService.queryUserId(userId);
+        session.setAttribute("resume",resume);
+        return "user/process";
+    }
+    @RequestMapping("/sureInterview")
+    public String sureInterview(HttpSession session)throws Exception{
+        int userId= (int) session.getAttribute("userId");
+        Resume resume=resumeService.queryUserId(userId);
+        resume.setState(3);
+        session.setAttribute("resume",resume);
         return "user/userSuccess";
     }
 }

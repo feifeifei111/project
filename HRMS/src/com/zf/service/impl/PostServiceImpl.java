@@ -27,4 +27,9 @@ public class PostServiceImpl implements PostService{
     public List<Post> queryAll() {
         return postMapper.queryAll();
     }
+
+    @Override
+    public List<Post> queryByDeptId(int deptId) {
+        return postMapper.queryByDeptId(deptId);
+    }
 }

@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: zf
-  Date: 2018/1/26
-  Time: 17:06
+  Date: 2018/1/29
+  Time: 10:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,16 +17,7 @@
     <title></title>
 </head>
 <body>
-<c:if test="${sessionScope.resume!=null}">
-    <form action="updateRusumeMiddle" method="post">
-        <input type="submit" value="修改简历">
-    </form>
-</c:if>
-<c:if test="${sessionScope.resume!=null&&sessionScope.resume.state!=0}">
-    <form action="process" method="post">
-        <input type="submit" value="查看面试通知">
-    </form>
-</c:if>
+<a href="addRecruitMiddle">添加招聘信息</a>
 <c:forEach items="${sessionScope.recruits}" var="recruit">
     <c:forEach items="${sessionScope.depts}" var="dept">
         <c:forEach items="${sessionScope.posts}" var="post">
@@ -35,12 +26,12 @@
                     <p>部门：${dept.name}</p>
                     <p>职位：${post.name}</p>
                     <p>职位需求：${recruit.requirement}</p>
-                    <p>工资范围：${recruit.salaryRange}</p>
+                    <p>工资待遇：${recruit.salaryRange}</p>
                     <p>公司简介：${recruit.introduction}</p>
                     <p>公司地址：${recruit.address}</p>
-                    <form action="apply" method="post">
+                    <form action="" method="post">
                         <input type="hidden" name="recruitId" value="${recruit.id}">
-                        <input type="submit" value="申请职位">
+                        <input type="submit" value="修改">
                     </form>
                 </div>
             </c:if>
