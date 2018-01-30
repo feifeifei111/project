@@ -12,12 +12,12 @@
         update employee set state = #{state},postId=#{postId},userId=#{userId},trainId=#{trainId},createTime=#{createTime} where id=#{id};
     </update>
     <select id="queryById" resultType="com.zf.model.Employee">
-        select * from employee where id=#{id};
+        select * from employee where id=#{id} and state!=0;
     </select>
     <select id="queryByUserId" resultType="com.zf.model.Employee">
-        select * from employee where userid=#{userId};
+        select * from employee where userid=#{userId} and state!=0;
     </select>
     <select id="queryByPostId" resultType="com.zf.model.Employee">
-        select * from employee where postid=#{postId};
+        select * from employee where postid=#{postId} and state!=0;
     </select>
 </mapper>

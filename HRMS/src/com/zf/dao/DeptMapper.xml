@@ -7,6 +7,9 @@
     <insert id="add">
         insert into dept (name, createtime) values (#{name},#{createTime});
     </insert>
+    <delete id="delete">
+        delete from dept where id=#{id};
+    </delete>
     <select id="queryById" resultType="com.zf.model.Dept">
         select * from dept where id=#{id};
     </select>

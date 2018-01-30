@@ -17,14 +17,23 @@
     <title></title>
 </head>
 <body>
+<a href="adminBack">返回</a>
+<div>
+    <form action="addPost" method="post">
+        <input type="text" name="name" value="职位名称" required><br>
+        <input type="text" name="description" value="职位描述" required><br>
+        <input type="hidden" name="deptId" value="${sessionScope.deptId}">
+        <input style="text-align: center" type="submit" value="添加">
+    </form>
+</div>
+
 <c:forEach items="${sessionScope.posts}" var="post">
     <div>
         <p>职位名称：${post.name}</p>
         <p>职位描述：${post.createTime}</p>
         <p>创建时间：${post.createTime}</p>
-        <a>修改职位</a>&nbsp;
-        <a>删除职位</a>&nbsp;
-        <a href="employeeMessage?postId=${post.id}">查看职位所有员工</a>&nbsp;
+        <a href="deletePost?postId=${post.id}">删除职位</a>&nbsp;
+        <a href="employeeMessage?postId=${post.id}">查看职位所有员工</a>
     </div>
 </c:forEach>
 

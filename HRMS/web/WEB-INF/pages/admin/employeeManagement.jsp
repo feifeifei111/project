@@ -20,7 +20,6 @@
 <c:forEach items="${sessionScope.employees}" var="employee">
     <div>
 
-        <a href="employeeMessage?postId=${employee.id}"></a>&nbsp;
     </div>
 </c:forEach>
 </body>

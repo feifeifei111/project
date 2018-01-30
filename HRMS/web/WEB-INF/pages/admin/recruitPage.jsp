@@ -17,6 +17,7 @@
     <title></title>
 </head>
 <body>
+<a href="listResume">查看游客简历</a>
 <a href="addRecruitMiddle">添加招聘信息</a>
 <c:forEach items="${sessionScope.recruits}" var="recruit">
     <c:forEach items="${sessionScope.depts}" var="dept">
@@ -29,10 +30,8 @@
                     <p>工资待遇：${recruit.salaryRange}</p>
                     <p>公司简介：${recruit.introduction}</p>
                     <p>公司地址：${recruit.address}</p>
-                    <form action="" method="post">
-                        <input type="hidden" name="recruitId" value="${recruit.id}">
-                        <input type="submit" value="修改">
-                    </form>
+                    <a href="updateRecruitMiddle?recruitId=${recruit.id}">修改招聘信息</a>&nbsp;
+                    <a href="delete?recruitId=${recruit.id}">撤销发布</a>
                 </div>
             </c:if>
         </c:forEach>

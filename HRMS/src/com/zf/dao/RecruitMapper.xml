@@ -7,12 +7,18 @@
         insert into recruit (postid, requirement, salaryrange,introduction, address, state, createtime)
         values (#{postId},#{requirement},#{salaryRange},#{introduction},#{address},#{state},#{createTime});
     </insert>
+    <update id="update">
+        update recruit set  requirement= #{requirement},salaryRange=#{salaryRange},introduction=#{introduction},address=#{address} where id=#{id};
+    </update>
+    <delete id="delete">
+        delete from recruit where id=#{id};
+    </delete>
 
     <select id="queryAll" resultType="com.zf.model.Recruit">
         select * from recruit;
     </select>
     <select id="queryPage" resultType="com.zf.model.Recruit">
-        select * from recruit where state=1 limit #{0},#{1};
+        select * from recruit limit #{0},#{1};
     </select>
     <select id="queryById" resultType="com.zf.model.Recruit">
         select * from recruit where id=#{id};

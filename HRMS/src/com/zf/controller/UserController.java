@@ -7,7 +7,7 @@ import com.zf.model.User;
 import com.zf.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import util.DoPaging;
+import com.zf.util.DoPaging;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;

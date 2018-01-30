@@ -10,20 +10,18 @@ public class Recruit implements Serializable{
     private String salaryRange;
     private String introduction;
     private String address;
-    private int state;
     private Date createTime;
 
     public Recruit() {
     }
 
-    public Recruit(int id, int postId, String requirement, String salaryRange, String introduction, String address, int state, Date createTime) {
+    public Recruit(int id, int postId, String requirement, String salaryRange, String introduction, String address, Date createTime) {
         this.id = id;
         this.postId = postId;
         this.requirement = requirement;
         this.salaryRange = salaryRange;
         this.introduction = introduction;
         this.address = address;
-        this.state = state;
         this.createTime = createTime;
     }
 
@@ -75,14 +73,6 @@ public class Recruit implements Serializable{
         this.address = address;
     }
 
-    public int getState() {
-        return state;
-    }
-
-    public void setState(int state) {
-        this.state = state;
-    }
-
     public Date getCreateTime() {
         return createTime;
     }
@@ -100,7 +90,6 @@ public class Recruit implements Serializable{
                 ", salaryRange='" + salaryRange + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", address='" + address + '\'' +
-                ", state=" + state +
                 ", createTime=" + createTime +
                 '}';
     }

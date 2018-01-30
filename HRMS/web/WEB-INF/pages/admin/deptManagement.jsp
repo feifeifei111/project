@@ -17,15 +17,19 @@
     <title></title>
 </head>
 <body>
+<a href="adminBack">返回</a>
+<form action="addDept" method="post">
+    <input type="text" name="name" value="部门名称" required>添加部门
+</form>
 <c:forEach items="${sessionScope.depts}" var="dept">
     <div>
         <p>部门名称：${dept.name}</p>
         <p>创建时间：${dept.createTime}</p>
-        <a>修改部门</a>&nbsp;
-        <a>删除部门</a>&nbsp;
-        <a href="postMessage?deptId=${dept.id}">查看部门内职位</a>&nbsp;
+        <%--<a>修改部门</a>&nbsp;--%>
+        <a href="deleteDept?deptId=${dept.id}">删除部门</a>&nbsp;
+        <a href="postManagement?deptId=${dept.id}">查看部门内职位</a>&nbsp;
     </div>
 </c:forEach>
-</table>
+
 </body>
 </html>

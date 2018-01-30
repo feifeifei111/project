@@ -19,6 +19,11 @@ public class DeptServiceImpl implements DeptService{
     }
 
     @Override
+    public boolean delete(int id) {
+        return deptMapper.delete(id);
+    }
+
+    @Override
     public Dept queryById(int id) {
         return deptMapper.queryById(id);
     }
