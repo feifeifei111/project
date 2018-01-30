@@ -37,4 +37,14 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> queryByPostId(int postId) {
         return employeeMapper.queryByPostId(postId);
     }
+
+    @Override
+    public List<Employee> queryPage(int postId, int currentRow, int pageSize) {
+        return employeeMapper.queryPage(postId,currentRow,pageSize);
+    }
+
+    @Override
+    public List<Employee> queryByLikeName(String name) {
+        return employeeMapper.queryByLikeName(name);
+    }
 }

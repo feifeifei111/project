@@ -24,6 +24,11 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
+    public boolean deleteByDeptId(int deptId) {
+        return postMapper.deleteByDeptId(deptId);
+    }
+
+    @Override
     public Post queryById(int id) {
         return postMapper.queryById(id);
     }

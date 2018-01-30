@@ -30,6 +30,9 @@
         <a href="postManagement?deptId=${dept.id}">查看部门内职位</a>&nbsp;
     </div>
 </c:forEach>
-
+<form action="searchEmployee" method="post">
+    <input type="text" name="name">
+    <input type="submit" value="搜索员工">
+</form>
 </body>
 </html>

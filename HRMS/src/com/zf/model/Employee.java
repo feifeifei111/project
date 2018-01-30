@@ -5,6 +5,9 @@ import java.util.Date;
 
 public class Employee implements Serializable {
     private int id;
+    private String name;
+    private String sex;
+    private String birthday;
     private int state;
     private int postId;
     private int userId;
@@ -14,8 +17,11 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(int id, int state, int postId, int userId, int trainId, Date createTime) {
+    public Employee(int id, String name, String sex, String birthday, int state, int postId, int userId, int trainId, Date createTime) {
         this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.birthday = birthday;
         this.state = state;
         this.postId = postId;
         this.userId = userId;
@@ -29,6 +35,30 @@ public class Employee implements Serializable {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
     public int getState() {
@@ -75,6 +105,9 @@ public class Employee implements Serializable {
     public String toString() {
         return "Employee{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", birthday='" + birthday + '\'' +
                 ", state=" + state +
                 ", postId=" + postId +
                 ", userId=" + userId +

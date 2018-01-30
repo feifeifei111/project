@@ -10,6 +10,9 @@
     <delete id="delete">
         delete from post where id=#{id};
     </delete>
+    <delete id="deleteByDeptId">
+        delete from post where deptid=#{deptId};
+    </delete>
     <select id="queryById" resultType="com.zf.model.Post">
         select * from post where id=#{id};
     </select>

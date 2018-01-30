@@ -16,17 +16,17 @@
     <base href="<%=basePath%>"/>
     <title></title>
     <script src="js/jquery-3.1.0.js"></script>
-    <%--<script>
+    <script>
         function interview() {
             var time=prompt("请输入面试时间","日期")
             if (time!=null&&time!=""){
-                $("#interviewTime").innerHTML(time);
+                $("#interviewTime").val(time);
                 return true;
             }else {
                 return false;
             }
         }
-    </script>--%>
+    </script>
 </head>
 <body>
 <a href="adminBack">返回</a>
@@ -104,15 +104,20 @@
                             <tr>
                                 <c:if test="${resume.state==1}">
                                     <form action="inform" method="post" onsubmit="return interview()">
-                                        <input type="text" id="interviewTime" name="interviewTime" required>
+                                        <input type="hidden" id="interviewTime" name="interviewTime">
                                         <input type="hidden" name="resumeId" value="${resume.id}">
                                         <input type="submit" value="通知面试">
                                     </form>
                                 </c:if>
                                 <c:if test="${resume.state==3}">
-                                    <form action="hire" method="post">
+                                    <form action="hire" method="post" style="float: left">
+                                        <input type="hidden" name="postId" value="${post.id}">
                                         <input type="hidden" name="resumeId" value="${resume.id}">
                                         <input type="submit" value="通过面试并录用">
+                                    </form>
+                                    <form action="unHire" method="post">
+                                        <input type="hidden" name="resumeId" value="${resume.id}">
+                                        <input type="submit" value="未通过面试">
                                     </form>
                                 </c:if>
                             </tr>
