@@ -15,6 +15,11 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        div{
+            float: left;
+        }
+    </style>
 </head>
 <body>
 <a href="adminBack">返回</a>
@@ -28,6 +33,7 @@
         <%--<a>修改部门</a>&nbsp;--%>
         <a href="deleteDept?deptId=${dept.id}">删除部门</a>&nbsp;
         <a href="postManagement?deptId=${dept.id}">查看部门内职位</a>&nbsp;
+        <a href="arrangeDeptTrain?deptId=${dept.id}">安排此部门员工参加培训</a>
     </div>
 </c:forEach>
 <form action="searchEmployee" method="post">

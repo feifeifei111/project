@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -304,5 +305,64 @@ public class AdminController {
     public String trainManagementMiddle(HttpSession session)throws Exception{
         session.setAttribute("trains",trainService.queryExist());
         return "admin/trainManagement";
+    }
+    @RequestMapping("/deleteTrain")
+    public String deleteTrain(int id,HttpSession session)throws Exception{
+        List<Employee> employees=employeeService.queryByTrainId(id);
+        if (employees.size()==0){
+            trainService.delete(id);
+            session.setAttribute("trains",trainService.queryExist());
+            return "admin/trainManagement";
+        }else {
+            session.setAttribute("trains",trainService.queryExist());
+            return "admin/trainManagement";
+        }
+    }
+    @RequestMapping("/updateTrain")
+    public String updateTrain(Train train,HttpSession session)throws Exception{
+        List<Employee> employees=employeeService.queryByTrainId(train.getId());
+        if (employees.size()==0){
+            trainService.update(train);
+            session.setAttribute("trains",trainService.queryExist());
+            return "admin/trainManagement";
+        }else {
+            session.setAttribute("trains",trainService.queryExist());
+            return "admin/trainManagement";
+        }
+    }
+    @RequestMapping("/arrangeTrain")
+    public String arrangeTrain( int employeeId,HttpSession session)throws Exception{
+        session.setAttribute("employeeId",employeeId);
+        session.setAttribute("trains",trainService.queryExist());
+        return "admin/selectTrain";
+    }
+    @RequestMapping("/addTrain")
+    public String addTrain( int employeeId,int trainId,HttpSession session)throws Exception{
+        Employee employee=employeeService.queryById(employeeId);
+        Train train=trainService.queryById(trainId);
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        Date date1=sdf.parse(train.getBeginTime());
+        if (date.getTime()<date1.getTime()){
+            employee.setTrainId(trainId);
+            employeeService.update(employee);
+        }
+        List<Employee> employeeList1 = employeeService.queryByPostId(employee.getPostId());//得到所有要显示的数据
+        int totalRows = employeeList1.size();//得到总行数
+        int pageSize=3;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Employee> employeeList = employeeService.queryPage(employee.getPostId(),0,pageSize);
+        session.setAttribute("employeeList",employeeList);
+        session.setAttribute("totalPages",totalPages);
+        return "admin/employeeManagement";
+    }
+    @RequestMapping("/arrangeDeptTrain")
+    public String arrangeDeptTrain(int deptId,HttpSession session)throws Exception{
+
+
+
+
+
+        return "admin/selectDeptTrain";
     }
 }

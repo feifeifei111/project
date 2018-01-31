@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface TrainService {
     boolean add(Train train);
+    boolean delete(int id);
     boolean update(Train train);
     Train queryById(int id);
     List<Train> queryExist();

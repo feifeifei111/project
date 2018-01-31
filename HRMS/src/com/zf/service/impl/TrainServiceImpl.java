@@ -19,6 +19,11 @@ public class TrainServiceImpl implements TrainService{
     }
 
     @Override
+    public boolean delete(int id) {
+        return trainMapper.delete(id);
+    }
+
+    @Override
     public boolean update(Train train) {
         return trainMapper.update(train);
     }

@@ -11,6 +11,9 @@
     <update id="update">
         update train set begintime = #{beginTime},endTime=#{endTime},name=#{name},content=#{content},state=#{state} where id=#{id};
     </update>
+    <delete id="delete">
+        delete from train where id=#{id};
+    </delete>
     <select id="queryById" resultType="com.zf.model.Train">
         select * from train where id=#{id};
     </select>

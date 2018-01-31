@@ -26,4 +26,7 @@
     <select id="queryByLikeName" resultType="com.zf.model.Employee">
         select * from employee where name like '${value}';
     </select>
+    <select id="queryByTrainId" resultType="com.zf.model.Employee">
+        select * from employee where trainid=#{trainId};
+    </select>
 </mapper>

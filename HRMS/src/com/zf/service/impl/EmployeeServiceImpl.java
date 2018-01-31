@@ -47,4 +47,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> queryByLikeName(String name) {
         return employeeMapper.queryByLikeName(name);
     }
+
+    @Override
+    public List<Employee> queryByTrainId(int trainId) {
+        return employeeMapper.queryByTrainId(trainId);
+    }
 }

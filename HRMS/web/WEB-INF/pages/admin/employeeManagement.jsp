@@ -37,6 +37,16 @@
                     <c:if test="${employee.state==0}">
                         <p>员工状态：离职</p>
                     </c:if>
+                    <c:if test="${sessionScope.trainId==0}">
+                        <p>非培训状态</p>
+                        <form action="arrangeTrain" method="post">
+                            <input type="hidden" name="employeeId" value="${employee.id}">
+                            <input type="submit" value="安排培训">
+                        </form>
+                    </c:if>
+                    <c:if test="${employee.trainId!=0}">
+                        <p>培训中</p>
+                    </c:if>
                 </div>
             </c:if>
         </c:forEach>
