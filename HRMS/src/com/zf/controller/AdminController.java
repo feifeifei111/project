@@ -6,6 +6,7 @@ import net.sf.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zf.util.DoPaging;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class AdminController {
     private PostService postService;
     @Resource
     private EmployeeService employeeService;
+    @Resource
+    private TrainService trainService;
 
     @RequestMapping("/addRecruitMiddle")
     public String addRecruitMiddle(HttpSession session)throws Exception{
@@ -295,5 +298,11 @@ public class AdminController {
         JSONArray array=JSONArray.fromObject(posts);
 //        System.out.println("post:"+array);
         response.getWriter().print(array);
+    }
+
+    @RequestMapping("/trainManagementMiddle")
+    public String trainManagementMiddle(HttpSession session)throws Exception{
+        session.setAttribute("trains",trainService.queryExist());
+        return "admin/trainManagement";
     }
 }

@@ -30,7 +30,7 @@
 <form>
     <input type="submit" value="考勤管理">
 </form>
-<form>
+<form action="trainManagementMiddle" method="post">
     <input type="submit" value="培训管理">
 </form>
 <form>

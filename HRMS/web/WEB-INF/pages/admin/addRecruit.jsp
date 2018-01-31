@@ -43,7 +43,7 @@
                                 var job="<option value='-1'>--请选择--</option>";
                                 for (var i = 0; i < data1.length; i++) {
                                     var obj = data1[i];
-                                    job=job+"<option value="+obj.pid+">"+obj.pname+"</option>"
+                                    job=job+"<option value="+obj.postId+">"+obj.name+"</option>"
                                 }
                                 $("#job").html(job);
                             }
@@ -53,48 +53,21 @@
             })
         )
     </script>
+
 </head>
 <body>
     <form action="addRecruit" method="post">
-        <%--职位名称：<select name="postId">
-            <c:forEach items="${sessionScope.posts}" var="post">
-                <option value="${post.id}">${post.name}</option>
-            </c:forEach>
-        </select><br>--%>
 
         选择部门：
         <select name="dept" id="dept">
-            <option value="-1">--请选择--</option>
+            <option value="0">--请选择--</option>
         </select>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         选择岗位：
         <select name="pid" id="job">
-            <option value="-1">--请选择--</option>
+            <option value="0">--请选择--</option>
         </select><br>
-        <%--<script>
-            var dept = document.getElementById("dept");
-            var post = document.getElementById("post");
-            var depts = [ '部门1', '部门2' ];// 后台请求
-            <c:forEach items="${sessionScope.depts}" var="d">
 
-            dept.innerHTML += '<option value="'+depts[i]+'">' + depts[i]
-                + '</option>';
-
-            </c:forEach>
-            for (var i = 0; i < depts.length; i++) {//初始化部门
-                dept.innerHTML += '<option value="'+depts[i]+'">' + depts[i]
-                    + '</option>';
-            }
-            //选择员工
-            function choose() {
-                // 根据dept.value后台请求
-                post.innerHTML = '<option>--请选择--</option>';
-                for (var i = 1; i <= 5; i++) {
-                    post.innerHTML += '<option value="'+i+'">' + dept.value
-                        + '里的员工' + i + '</option>';
-                }
-            }
-        </script>--%>
 
         职位要求：<input type="text" name="requirement"><br>
         薪资待遇：<input type="text" name="salaryRange"><br>

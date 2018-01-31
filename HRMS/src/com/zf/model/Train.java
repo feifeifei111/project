@@ -9,19 +9,17 @@ public class Train implements Serializable {
     private String name;
     private String content;
     private int state;
-    private Employee employee;
 
     public Train() {
     }
 
-    public Train(int id, String beginTime, String endTime, String name, String content, int state, Employee employee) {
+    public Train(int id, String beginTime, String endTime, String name, String content, int state) {
         this.id = id;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.name = name;
         this.content = content;
         this.state = state;
-        this.employee = employee;
     }
 
     public int getId() {
@@ -72,14 +70,6 @@ public class Train implements Serializable {
         this.state = state;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
     @Override
     public String toString() {
         return "Train{" +
@@ -89,7 +79,6 @@ public class Train implements Serializable {
                 ", name='" + name + '\'' +
                 ", content='" + content + '\'' +
                 ", state=" + state +
-                ", employee=" + employee +
                 '}';
     }
 }
