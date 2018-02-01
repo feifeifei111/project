@@ -358,11 +358,31 @@ public class AdminController {
     }
     @RequestMapping("/arrangeDeptTrain")
     public String arrangeDeptTrain(int deptId,HttpSession session)throws Exception{
-
-
-
-
-
+        session.setAttribute("deptId",deptId);
+        session.setAttribute("trains",trainService.queryExist());
         return "admin/selectDeptTrain";
+    }
+    @RequestMapping("/addDeptTrain")
+    public String addDeptTrain( int trainId,HttpSession session)throws Exception{
+        int deptId= (int) session.getAttribute("deptId");
+        Train train=trainService.queryById(trainId);
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        Date date1=sdf.parse(train.getBeginTime());
+        if (date.getTime()<date1.getTime()){
+
+            List<Post> posts=postService.queryByDeptId(deptId);
+            for (Post post:posts){
+                List<Employee>employees=employeeService.queryByPostId(post.getId());
+                for (Employee employee:employees){
+                    if (employee.getTrainId()==0){
+                        employee.setTrainId(trainId);
+                        employeeService.update(employee);
+                    }
+                }
+            }
+        }
+
+        return "admin/deptManagement";
     }
 }
