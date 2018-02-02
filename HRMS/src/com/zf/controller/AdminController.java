@@ -2,7 +2,6 @@ package com.zf.controller;
 
 import com.zf.model.*;
 import com.zf.service.*;
-import net.sf.json.JSONArray;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.zf.util.DoPaging;
@@ -12,9 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class AdminController {
     @RequestMapping("/addRecruitMiddle")
     public String addRecruitMiddle(HttpSession session)throws Exception{
         session.setAttribute("depts",deptService.queryAll());
-        session.setAttribute("posts",postService.queryAll());
+//        session.setAttribute("posts",postService.queryAll());
         return "admin/addRecruit";
     }
     @RequestMapping("/addRecruit")
@@ -179,6 +176,19 @@ public class AdminController {
         session.setAttribute("postId",postId);
         return "admin/employeeManagement";
     }
+    @RequestMapping("/changePost")
+    public String changePost(int employeeId,int postId,HttpSession session)throws Exception{
+        Employee employee=employeeService.queryById(employeeId);
+        employee.setPostId(postId);
+        employeeService.update(employee);
+        List<Employee> employeeList1 = employeeService.queryByPostId(postId);//得到所有要显示的数据
+        int totalRows = employeeList1.size();//得到总行数
+        int pageSize=3;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Employee> employeeList = employeeService.queryPage(postId,0,pageSize);
+        session.setAttribute("employeeList",employeeList);
+        return "admin/employeeManagement";
+    }
     @RequestMapping("/dismiss")
     public String dismiss(int employeeId,HttpSession session)throws Exception{
         Employee employee=employeeService.queryById(employeeId);
@@ -200,7 +210,7 @@ public class AdminController {
     public String updateRecruit(int recruitId,String requirement,String salaryRange,String introduction,String address,HttpSession session)throws Exception{
         Recruit recruit=recruitService.queryById(recruitId);
         recruit.setRequirement(requirement);
-        recruit.setSalaryRange(salaryRange);
+        recruit.setSalary(salaryRange);
         recruit.setIntroduction(introduction);
         recruit.setAddress(address);
         recruitService.update(recruit);
@@ -226,7 +236,7 @@ public class AdminController {
         return "admin/recruitPage";
     }
     @RequestMapping("/adminBack")
-    public String adminBack(HttpSession session)throws Exception{
+    public String adminBack()throws Exception{
         return "admin/adminSuccess";
     }
     @RequestMapping("/addDept")
@@ -285,20 +295,6 @@ public class AdminController {
         }else {
             return "admin/deptManagement";
         }
-    }
-
-    @RequestMapping("/listDepts")
-    public void getDepts(HttpServletResponse response)throws Exception{
-        List<Dept> depts = deptService.queryAll();
-        JSONArray array=JSONArray.fromObject(depts);
-        response.getWriter().print(array);
-    }
-    @RequestMapping("/listPostByDeptId")
-    public void listPostByDeptId(int deptId, HttpServletResponse response)throws Exception{
-        List<Post> posts = postService.queryByDeptId(deptId);
-        JSONArray array=JSONArray.fromObject(posts);
-//        System.out.println("post:"+array);
-        response.getWriter().print(array);
     }
 
     @RequestMapping("/trainManagementMiddle")
@@ -389,7 +385,12 @@ public class AdminController {
                 }
             }
         }
-
         return "admin/deptManagement";
+    }
+    @RequestMapping("/getPostByDept")
+    public @ResponseBody List<Post> getPostByDept(int d)throws Exception{
+        List<Post>positions=postService.queryByDeptId(d);
+        System.out.println(positions);
+        return positions;
     }
 }

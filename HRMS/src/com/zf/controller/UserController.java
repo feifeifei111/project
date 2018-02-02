@@ -1,9 +1,6 @@
 package com.zf.controller;
 
-import com.zf.model.Employee;
-import com.zf.model.Recruit;
-import com.zf.model.Resume;
-import com.zf.model.User;
+import com.zf.model.*;
 import com.zf.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +9,7 @@ import com.zf.util.DoPaging;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +27,8 @@ public class UserController {
     private DeptService deptService;
     @Resource
     private PostService postService;
+    @Resource
+    private CheckOnService checkOnService;
 
     @RequestMapping("/registerMiddle")
     public String registerMiddle()throws Exception{
@@ -65,6 +65,11 @@ public class UserController {
             if (user!=null&&user.getPass().equals(pass)){
                 Employee employee=employeeService.queryByUserId(user.getId());
                 if (employee!=null){
+                    Date date=new Date();
+                    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                    String today=sdf.format(date);
+                    CheckOn checkOn=checkOnService.queryByToday(today);
+                    session.setAttribute("checkOn",checkOn);
                     session.setAttribute("employeeId",employee.getId());
                     return "employee/employeeSuccess";
                 }else {

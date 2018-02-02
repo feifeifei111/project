@@ -26,7 +26,7 @@
                         <span>部门：${dept.name}</span><p>
                         <span>职位：${post.name}</span><p>
                         职位需求：<input type="text" name="requirement" value="${sessionScope.recruit.requirement}"></p>
-                        薪资待遇：<input type="text" name="salaryRange" value="${sessionScope.recruit.salaryRange}"></p>
+                        薪资待遇：<input type="text" name="salary" value="${sessionScope.recruit.salary}"></p>
                         公司简介：<input type="text" name="introduction" value="${sessionScope.recruit.introduction}"></p>
                         公司地址：<input type="text" name="address" value="${sessionScope.recruit.address}"></p>
                         <input type="hidden" name="recruitId" value="${sessionScope.recruit.id}">

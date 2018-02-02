@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: zf
@@ -16,8 +17,11 @@
     <title></title>
 </head>
 <body>
-<form>
-    <input type="submit" value="打卡">
-</form>
+    <c:if test="${sessionScope.checkOn.beginState==0}">
+        <a href="signIn">签到</a>
+    </c:if>
+    <c:if test="${sessionScope.checkOn.beginState==1&&sessionScope.checkOn.endState==0}">
+        <a href="signOut?checkOnId=${sessionScope.checkOn.id}">签退</a>
+    </c:if>
 </body>
 </html>

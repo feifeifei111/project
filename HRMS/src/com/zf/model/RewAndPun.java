@@ -8,17 +8,17 @@ public class RewAndPun implements Serializable {
     private double money;
     private Date time;
     private String cause;
-    private Employee employee;
+    private int employeeId;
 
     public RewAndPun() {
     }
 
-    public RewAndPun(int id, double money, Date time, String cause, Employee employee) {
+    public RewAndPun(int id, double money, Date time, String cause, int employeeId) {
         this.id = id;
         this.money = money;
         this.time = time;
         this.cause = cause;
-        this.employee = employee;
+        this.employeeId = employeeId;
     }
 
     public int getId() {
@@ -53,12 +53,12 @@ public class RewAndPun implements Serializable {
         this.cause = cause;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class RewAndPun implements Serializable {
                 ", money=" + money +
                 ", time=" + time +
                 ", cause='" + cause + '\'' +
-                ", employee=" + employee +
+                ", employeeId=" + employeeId +
                 '}';
     }
 }

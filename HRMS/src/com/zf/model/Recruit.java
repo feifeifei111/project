@@ -7,7 +7,7 @@ public class Recruit implements Serializable{
     private int id;
     private int postId;
     private String requirement;
-    private String salaryRange;
+    private String salary;
     private String introduction;
     private String address;
     private Date createTime;
@@ -15,11 +15,11 @@ public class Recruit implements Serializable{
     public Recruit() {
     }
 
-    public Recruit(int id, int postId, String requirement, String salaryRange, String introduction, String address, Date createTime) {
+    public Recruit(int id, int postId, String requirement, String salary, String introduction, String address, Date createTime) {
         this.id = id;
         this.postId = postId;
         this.requirement = requirement;
-        this.salaryRange = salaryRange;
+        this.salary = salary;
         this.introduction = introduction;
         this.address = address;
         this.createTime = createTime;
@@ -49,12 +49,12 @@ public class Recruit implements Serializable{
         this.requirement = requirement;
     }
 
-    public String getSalaryRange() {
-        return salaryRange;
+    public String getSalary() {
+        return salary;
     }
 
-    public void setSalaryRange(String salaryRange) {
-        this.salaryRange = salaryRange;
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
 
     public String getIntroduction() {
@@ -87,7 +87,7 @@ public class Recruit implements Serializable{
                 "id=" + id +
                 ", postId=" + postId +
                 ", requirement='" + requirement + '\'' +
-                ", salaryRange='" + salaryRange + '\'' +
+                ", salary='" + salary + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", address='" + address + '\'' +
                 ", createTime=" + createTime +

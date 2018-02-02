@@ -9,18 +9,22 @@ public class CheckOn implements Serializable {
     private Date endTime;
     private int beginState;
     private int endState;
-    private Employee employee;
+    private String today;
+    private int month;
+    private int employeeId;
 
     public CheckOn() {
     }
 
-    public CheckOn(int id, Date beginTime, Date endTime, int beginState, int endState, Employee employee) {
+    public CheckOn(int id, Date beginTime, Date endTime, int beginState, int endState, String today,int month,int employeeId) {
         this.id = id;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.beginState = beginState;
         this.endState = endState;
-        this.employee = employee;
+        this.today=today;
+        this.month=month;
+        this.employeeId = employeeId;
     }
 
     public int getId() {
@@ -63,12 +67,28 @@ public class CheckOn implements Serializable {
         this.endState = endState;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public String getToday() {
+        return today;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setToday(String today) {
+        this.today = today;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
     @Override
@@ -79,7 +99,9 @@ public class CheckOn implements Serializable {
                 ", endTime=" + endTime +
                 ", beginState=" + beginState +
                 ", endState=" + endState +
-                ", employee=" + employee +
+                ", today=" + today +
+                ", month=" + month +
+                ", employeeId=" + employeeId +
                 '}';
     }
 }

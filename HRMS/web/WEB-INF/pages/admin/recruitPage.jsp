@@ -15,6 +15,12 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <style>
+        .d{
+            float: left;
+            margin: 10px;
+        }
+    </style>
 </head>
 <body>
 <a href="listResume">查看游客简历</a>
@@ -23,7 +29,7 @@
     <c:forEach items="${sessionScope.depts}" var="dept">
         <c:forEach items="${sessionScope.posts}" var="post">
             <c:if test="${recruit.postId==post.id&&post.deptId==dept.id}">
-                <div class="d1">
+                <div class="d">
                     <p>部门：${dept.name}</p>
                     <p>职位：${post.name}</p>
                     <p>职位需求：${recruit.requirement}</p>
