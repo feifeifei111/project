@@ -16,6 +16,8 @@
     <title></title>
 </head>
 <body>
-
+<form>
+    <input type="submit" value="打卡">
+</form>
 </body>
 </html>

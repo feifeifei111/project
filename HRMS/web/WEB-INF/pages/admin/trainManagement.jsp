@@ -31,11 +31,11 @@
 <body>
 <a href="adminBack">返回</a>
 <div id="d1" style="display: none">
-    <form>
+    <form action="addTrain" method="post">
         培训名称：<input  type="text" name="name">
         培训内容：<input type="text" name="content">
-        起始时间：<input type="text" name="beginTime">
-        结束时间：<input type="text" name="endTime">
+        起始时间：<input type="text" name="beginTime" value="年-月-日 时:分">
+        结束时间：<input type="text" name="endTime" value="年-月-日 时:分">
         <input type="submit" value="添加">
     </form>
 </div>

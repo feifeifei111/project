@@ -32,7 +32,7 @@
             <td>${train.beginTime}</td>
             <td>${train.endTime}</td>
             <td>
-                <form action="addTrain" method="post">
+                <form action="addEmployeeTrain" method="post">
                     <input type="hidden" name="trainId" value="${train.id}">
                     <input type="hidden" name="employeeId" value="${sessionScope.employeeId}">
                     <input type="submit" value="选择">

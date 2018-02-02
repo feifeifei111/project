@@ -306,6 +306,13 @@ public class AdminController {
         session.setAttribute("trains",trainService.queryExist());
         return "admin/trainManagement";
     }
+    @RequestMapping("/addTrain")
+    public String addTrain(Train train,HttpSession session)throws Exception{
+        train.setState(1);
+        trainService.add(train);
+        session.setAttribute("trains",trainService.queryExist());
+        return "admin/trainManagement";
+    }
     @RequestMapping("/deleteTrain")
     public String deleteTrain(int id,HttpSession session)throws Exception{
         List<Employee> employees=employeeService.queryByTrainId(id);
@@ -336,8 +343,8 @@ public class AdminController {
         session.setAttribute("trains",trainService.queryExist());
         return "admin/selectTrain";
     }
-    @RequestMapping("/addTrain")
-    public String addTrain( int employeeId,int trainId,HttpSession session)throws Exception{
+    @RequestMapping("/addEmployeeTrain")
+    public String addEmployeeTrain( int employeeId,int trainId,HttpSession session)throws Exception{
         Employee employee=employeeService.queryById(employeeId);
         Train train=trainService.queryById(trainId);
         Date date=new Date();
