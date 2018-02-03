@@ -3,7 +3,7 @@ package com.zf.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class CheckOn implements Serializable {
+public class Attendance implements Serializable {
     private int id;
     private Date beginTime;
     private Date endTime;
@@ -13,10 +13,10 @@ public class CheckOn implements Serializable {
     private int month;
     private int employeeId;
 
-    public CheckOn() {
+    public Attendance() {
     }
 
-    public CheckOn(int id, Date beginTime, Date endTime, int beginState, int endState, String today,int month,int employeeId) {
+    public Attendance(int id, Date beginTime, Date endTime, int beginState, int endState, String today, int month, int employeeId) {
         this.id = id;
         this.beginTime = beginTime;
         this.endTime = endTime;
@@ -93,7 +93,7 @@ public class CheckOn implements Serializable {
 
     @Override
     public String toString() {
-        return "CheckOn{" +
+        return "Attendance{" +
                 "id=" + id +
                 ", beginTime=" + beginTime +
                 ", endTime=" + endTime +

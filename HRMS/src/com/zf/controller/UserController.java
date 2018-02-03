@@ -28,7 +28,7 @@ public class UserController {
     @Resource
     private PostService postService;
     @Resource
-    private CheckOnService checkOnService;
+    private AttendanceService attendanceService;
 
     @RequestMapping("/registerMiddle")
     public String registerMiddle()throws Exception{
@@ -68,8 +68,8 @@ public class UserController {
                     Date date=new Date();
                     SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                     String today=sdf.format(date);
-                    CheckOn checkOn=checkOnService.queryByToday(today);
-                    session.setAttribute("checkOn",checkOn);
+                    Attendance attend= attendanceService.queryByTodayEmployeeId(today,employee.getId());
+                    session.setAttribute("attend",attend);
                     session.setAttribute("employeeId",employee.getId());
                     return "employee/employeeSuccess";
                 }else {

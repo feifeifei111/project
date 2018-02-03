@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zf.dao.AttendanceMapper">
+
+    <insert id="add">
+        insert into attendance (begintime, endtime, beginstate, endstate, today, month,employeeid) values (#{beginTime},#{endTime},#{beginState},#{endState},#{today},#{month},#{employeeId});
+    </insert>
+    <update id="update">
+        update attendance set begintime = #{beginTime},endTime=#{endTime},beginState=#{beginState},endState=#{endState},today=#{today},month=#{month},employeeId=#{employeeId} where id=#{id};
+    </update>
+    <select id="queryByTodayEmployeeId" resultType="com.zf.model.Attendance">
+        select * from attendance where today=#{today} and employeeId=#{employeeId};
+    </select>
+    <select id="queryByMonth" resultType="com.zf.model.Attendance">
+        select * from attendance where month=#{month};
+    </select>
+    <select id="queryById" resultType="com.zf.model.Attendance">
+        select * from attendance where id=#{id};
+    </select>
+</mapper>

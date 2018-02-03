@@ -818,7 +818,7 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="207" parent="2" name="checkon">
+    <table id="207" parent="2" name="attendance">
       <Engine>InnoDB</Engine>
     </table>
     <table id="208" parent="2" name="dept">
