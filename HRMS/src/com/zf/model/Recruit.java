@@ -7,7 +7,7 @@ public class Recruit implements Serializable{
     private int id;
     private int postId;
     private String requirement;
-    private String salary;
+    private double salary;
     private String introduction;
     private String address;
     private Date createTime;
@@ -15,7 +15,7 @@ public class Recruit implements Serializable{
     public Recruit() {
     }
 
-    public Recruit(int id, int postId, String requirement, String salary, String introduction, String address, Date createTime) {
+    public Recruit(int id, int postId, String requirement, double salary, String introduction, String address, Date createTime) {
         this.id = id;
         this.postId = postId;
         this.requirement = requirement;
@@ -49,11 +49,11 @@ public class Recruit implements Serializable{
         this.requirement = requirement;
     }
 
-    public String getSalary() {
+    public double getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 

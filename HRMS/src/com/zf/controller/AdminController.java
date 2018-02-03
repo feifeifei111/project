@@ -94,11 +94,13 @@ public class AdminController {
     @RequestMapping("/hire")
     public String hire(int postId,int resumeId,HttpSession session)throws Exception{
         Resume resume=resumeService.queryById(resumeId);
+        Recruit recruit=recruitService.queryById(resume.getRecruitId());
         resume.setState(4);
         Employee employee=new Employee();
         employee.setName(resume.getName());
         employee.setSex(resume.getSex());
         employee.setBirthday(resume.getBirthday());
+        employee.setBasicSalary(recruit.getSalary());
         employee.setState(1);
         employee.setPostId(postId);
         employee.setUserId(resume.getUserId());
@@ -207,7 +209,7 @@ public class AdminController {
         return "admin/updateRecruit";
     }
     @RequestMapping("/updateRecruit")
-    public String updateRecruit(int recruitId,String requirement,String salaryRange,String introduction,String address,HttpSession session)throws Exception{
+    public String updateRecruit(int recruitId,String requirement,int salaryRange,String introduction,String address,HttpSession session)throws Exception{
         Recruit recruit=recruitService.queryById(recruitId);
         recruit.setRequirement(requirement);
         recruit.setSalary(salaryRange);

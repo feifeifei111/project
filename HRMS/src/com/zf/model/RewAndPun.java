@@ -6,17 +6,21 @@ import java.util.Date;
 public class RewAndPun implements Serializable {
     private int id;
     private double money;
-    private Date time;
+    private String time;
+    private int year;
+    private int month;
     private String cause;
     private int employeeId;
 
     public RewAndPun() {
     }
 
-    public RewAndPun(int id, double money, Date time, String cause, int employeeId) {
+    public RewAndPun(int id, double money, String time,int year,int month, String cause, int employeeId) {
         this.id = id;
         this.money = money;
         this.time = time;
+        this.year = year;
+        this.month = month;
         this.cause = cause;
         this.employeeId = employeeId;
     }
@@ -37,12 +41,28 @@ public class RewAndPun implements Serializable {
         this.money = money;
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
     }
 
     public String getCause() {
@@ -67,6 +87,8 @@ public class RewAndPun implements Serializable {
                 "id=" + id +
                 ", money=" + money +
                 ", time=" + time +
+                ", year=" + year +
+                ", month=" + month +
                 ", cause='" + cause + '\'' +
                 ", employeeId=" + employeeId +
                 '}';

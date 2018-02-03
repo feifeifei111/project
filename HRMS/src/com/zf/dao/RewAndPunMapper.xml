@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.RewAndPunMapper">
 
+    <insert id="add">
+        insert into rewandpun (money, time, year, month, cause, employeeid) values (#{money},#{time},#{year},#{month},#{cause},#{employeeId});
+    </insert>
+    <update id="update">
+        update rewandpun set money = #{money},time=#{time},year=#{year},month=#{month},cause=#{cause},employeeId=#{employeeId} where id=#{id};
+    </update>
+    <select id="queryByET" resultType="com.zf.model.RewAndPun">
+        select * from rewandpun where employeeid=#{employeeId} and time=#{time};
+    </select>
 </mapper>

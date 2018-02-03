@@ -8,6 +8,7 @@ public class Employee implements Serializable {
     private String name;
     private String sex;
     private String birthday;
+    private double basicSalary;
     private int state;
     private int postId;
     private int userId;
@@ -17,11 +18,12 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(int id, String name, String sex, String birthday, int state, int postId, int userId, int trainId, Date createTime) {
+    public Employee(int id, String name, String sex, String birthday,double basicSalary, int state, int postId, int userId, int trainId, Date createTime) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
+        this.basicSalary = basicSalary;
         this.state = state;
         this.postId = postId;
         this.userId = userId;
@@ -59,6 +61,14 @@ public class Employee implements Serializable {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public double getBasicSalary() {
+        return basicSalary;
+    }
+
+    public void setBasicSalary(double basicSalary) {
+        this.basicSalary = basicSalary;
     }
 
     public int getState() {
@@ -108,6 +118,7 @@ public class Employee implements Serializable {
                 ", name='" + name + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthday='" + birthday + '\'' +
+                ", basicSalary=" + basicSalary +
                 ", state=" + state +
                 ", postId=" + postId +
                 ", userId=" + userId +

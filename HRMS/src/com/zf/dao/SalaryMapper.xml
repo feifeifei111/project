@@ -4,4 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.SalaryMapper">
 
+    <insert id="add">
+        insert into salary (basic, bonus, social, rewandpun, year, month, employeeid) values (#{basic},#{bonus},#{social},#{rewAndPun},#{year},#{month},#{employeeId});
+    </insert>
+    <update id="update">
+        update salary set basic = #{basic},bonus=#{bonus},social=#{social},rewAndPun=#{rewAndPun},year=#{year},month=#{month},employeeId=#{employeeId} where id=#{id};
+    </update>
+    <select id="queryEYM" resultType="com.zf.model.Salary">
+        select * from salary where employeeid=#{employeeId} and year=#{year} and month=#{month};
+    </select>
 </mapper>

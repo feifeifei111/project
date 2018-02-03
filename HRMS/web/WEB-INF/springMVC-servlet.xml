@@ -10,7 +10,7 @@
 
     <!--配置字符集编码转换器，针对@ResponseBody-->
     <mvc:annotation-driven>
-        <mvc:message-converters>
+        <mvc:message-converters register-defaults="true">
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes" value="text/html;charset=utf-8"/>
             </bean>

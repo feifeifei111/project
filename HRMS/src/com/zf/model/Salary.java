@@ -9,19 +9,21 @@ public class Salary implements Serializable {
     private double bonus;
     private double social;
     private double rewAndPun;
-    private Date accountTime;
+    private int year;
+    private int month;
     private int employeeId;
 
     public Salary() {
     }
 
-    public Salary(int id, double basic, double bonus, double social, double rewAndPun, Date accountTime, int employeeId) {
+    public Salary(int id, double basic, double bonus, double social, double rewAndPun, int year,int month, int employeeId) {
         this.id = id;
         this.basic = basic;
         this.bonus = bonus;
         this.social = social;
         this.rewAndPun = rewAndPun;
-        this.accountTime = accountTime;
+        this.year = year;
+        this.month = month;
         this.employeeId = employeeId;
     }
 
@@ -65,12 +67,20 @@ public class Salary implements Serializable {
         this.rewAndPun = rewAndPun;
     }
 
-    public Date getAccountTime() {
-        return accountTime;
+    public int getYear() {
+        return year;
     }
 
-    public void setAccountTime(Date accountTime) {
-        this.accountTime = accountTime;
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
     }
 
     public int getEmployeeId() {
@@ -89,7 +99,8 @@ public class Salary implements Serializable {
                 ", bonus=" + bonus +
                 ", social=" + social +
                 ", rewAndPun=" + rewAndPun +
-                ", accountTime=" + accountTime +
+                ", year=" + year +
+                ", month=" + month +
                 ", employeeId=" + employeeId +
                 '}';
     }

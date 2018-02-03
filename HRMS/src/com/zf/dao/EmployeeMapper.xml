@@ -5,11 +5,11 @@
 <mapper namespace="com.zf.dao.EmployeeMapper">
 
     <insert id="add">
-        insert into employee (name,sex,birthday,state, postid, userid, trainid, createtime)
-        values (#{name},#{sex},#{birthday},#{state},#{postId},#{userId},#{trainId},#{createTime});
+        insert into employee (name,sex,birthday,basicsalary,state, postid, userid, trainid, createtime)
+        values (#{name},#{sex},#{birthday},#{basicSalary},#{state},#{postId},#{userId},#{trainId},#{createTime});
     </insert>
     <update id="update">
-        update employee set name=#{name},sex=#{sex},birthday=#{birthday}, state = #{state},postId=#{postId},userId=#{userId},trainId=#{trainId},createTime=#{createTime} where id=#{id};
+        update employee set name=#{name},sex=#{sex},birthday=#{birthday},basicSalary=#{basicSalary}, state = #{state},postId=#{postId},userId=#{userId},trainId=#{trainId},createTime=#{createTime} where id=#{id};
     </update>
     <select id="queryById" resultType="com.zf.model.Employee">
         select * from employee where id=#{id};

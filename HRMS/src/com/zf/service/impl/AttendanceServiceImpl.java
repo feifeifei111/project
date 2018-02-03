@@ -34,8 +34,14 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
 
     @Override
-    public List<Attendance> queryByMonth(int month) {
-        return attendanceMapper.queryByMonth(month);
+    public List<Attendance> queryByYM(int year, int month,int employeeId) {
+        return attendanceMapper.queryByYM(year,month,employeeId);
     }
+
+    @Override
+    public List<Attendance> queryPageByYM(int year, int month, int employeeId, int currentRow, int pageSize) {
+        return attendanceMapper.queryPageByYM(year,month,employeeId,currentRow,pageSize);
+    }
+
 
 }

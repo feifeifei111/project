@@ -10,19 +10,21 @@ public class Attendance implements Serializable {
     private int beginState;
     private int endState;
     private String today;
+    private int year;
     private int month;
     private int employeeId;
 
     public Attendance() {
     }
 
-    public Attendance(int id, Date beginTime, Date endTime, int beginState, int endState, String today, int month, int employeeId) {
+    public Attendance(int id, Date beginTime, Date endTime, int beginState, int endState, String today, int year,int month, int employeeId) {
         this.id = id;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.beginState = beginState;
         this.endState = endState;
         this.today=today;
+        this.year=year;
         this.month=month;
         this.employeeId = employeeId;
     }
@@ -75,6 +77,14 @@ public class Attendance implements Serializable {
         this.today = today;
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public int getMonth() {
         return month;
     }
@@ -100,6 +110,7 @@ public class Attendance implements Serializable {
                 ", beginState=" + beginState +
                 ", endState=" + endState +
                 ", today=" + today +
+                ", year=" + year +
                 ", month=" + month +
                 ", employeeId=" + employeeId +
                 '}';
