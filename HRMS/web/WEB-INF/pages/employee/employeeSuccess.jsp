@@ -24,5 +24,6 @@
         <a href="signOut?attendId=${sessionScope.attend.id}">签退</a>
     </c:if>
     <a href="selectAttendance">查看打卡记录</a>
+    <a href="selectRewAndPun">查看奖惩记录</a>
 </body>
 </html>

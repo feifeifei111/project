@@ -6,6 +6,7 @@ import com.zf.service.RewAndPunService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class RewAndPunServiceImpl implements RewAndPunService{
@@ -25,5 +26,15 @@ public class RewAndPunServiceImpl implements RewAndPunService{
     @Override
     public RewAndPun queryByET(int employeeId, String time) {
         return rewAndPunMapper.queryByET(employeeId,time);
+    }
+
+    @Override
+    public List<RewAndPun> queryByEYM(int employeeId, int year, int month) {
+        return rewAndPunMapper.queryByEYM(employeeId,year,month);
+    }
+
+    @Override
+    public List<RewAndPun> queryPageByEYM(int employeeId, int year, int month, int currentRow, int pageSize) {
+        return rewAndPunMapper.queryPageByEYM(employeeId,year,month,currentRow,pageSize);
     }
 }

@@ -145,6 +145,10 @@ public class EmployController {
         attendanceService.update(attendance);
         return "employee/employeeSuccess";
     }
+    @RequestMapping("/employeeBack")
+    public String employeeBack()throws Exception{
+        return "employee/employeeSuccess";
+    }
     @RequestMapping("/selectAttendance")
     public String selectAttendance(HttpSession session)throws Exception{
         int employeeId= (int) session.getAttribute("employeeId");
@@ -245,5 +249,106 @@ public class EmployController {
         session.setAttribute("year",year);
         session.setAttribute("month",month);
         return "employee/currentMonthAttendance";
+    }
+    @RequestMapping("/selectRewAndPun")
+    public String selectRewAndPun(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        Calendar calendar=Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+
+        List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
+        int totalRows = rewAndPunList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
+        session.setAttribute("rewAndPuns",rewAndPuns);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        return "employee/currentMonthRewAndPun";
+    }
+    @RequestMapping("/showRewAndPun")
+    public String showRewAndPun(int currentPage,HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        int pageSize=10;
+        int currentRow=(currentPage-1)*pageSize;
+        List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,currentRow,pageSize);
+        session.setAttribute("rewAndPuns",rewAndPuns);
+        return "employee/currentMonthRewAndPun";
+    }
+    @RequestMapping("/beforeRP")
+    public String beforeRP(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        if (month==1){
+            year-=1;
+            month=12;
+            List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
+            if (rewAndPunList.size()==0){
+                return "employee/currentMonthRewAndPun";
+            }
+            int totalRows = rewAndPunList.size();//得到总行数
+            int pageSize=10;
+            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+            List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
+            session.setAttribute("rewAndPuns",rewAndPuns);
+            session.setAttribute("totalPages",totalPages);
+            session.setAttribute("year",year);
+            session.setAttribute("month",month);
+            return "employee/currentMonthRewAndPun";
+        }
+        List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
+        if (rewAndPunList.size()==0){
+            return "employee/currentMonthRewAndPun";
+        }
+        int totalRows = rewAndPunList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
+        session.setAttribute("rewAndPuns",rewAndPuns);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        return "employee/currentMonthRewAndPun";
+    }
+    @RequestMapping("/afterRP")
+    public String afterRP(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        if (month==12){
+            year+=1;
+            month=1;
+            List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
+            if (rewAndPunList.size()==0){
+                return "employee/currentMonthRewAndPun";
+            }
+            int totalRows = rewAndPunList.size();//得到总行数
+            int pageSize=10;
+            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+            List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
+            session.setAttribute("rewAndPuns",rewAndPuns);
+            session.setAttribute("totalPages",totalPages);
+            session.setAttribute("year",year);
+            session.setAttribute("month",month);
+            return "employee/currentMonthRewAndPun";
+        }
+        List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
+        if (rewAndPunList.size()==0){
+            return "employee/currentMonthRewAndPun";
+        }
+        int totalRows = rewAndPunList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
+        session.setAttribute("rewAndPuns",rewAndPuns);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        return "employee/currentMonthRewAndPun";
     }
 }

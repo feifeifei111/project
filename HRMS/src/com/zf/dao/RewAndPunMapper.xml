@@ -13,4 +13,10 @@
     <select id="queryByET" resultType="com.zf.model.RewAndPun">
         select * from rewandpun where employeeid=#{employeeId} and time=#{time};
     </select>
+    <select id="queryByEYM" resultType="com.zf.model.RewAndPun">
+        select * from rewandpun where employeeid=#{employeeId} and year=#{year} and month=#{month};
+    </select>
+    <select id="queryPageByEYM" resultType="com.zf.model.RewAndPun">
+        select * from rewandpun where employeeid=#{employeeId} and year=#{year} and month=#{month} limit #{3},#{4};
+    </select>
 </mapper>
