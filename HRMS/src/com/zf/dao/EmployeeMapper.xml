@@ -29,4 +29,7 @@
     <select id="queryByTrainId" resultType="com.zf.model.Employee">
         select * from employee where trainid=#{trainId};
     </select>
+    <select id="queryAll" resultType="com.zf.model.Employee">
+        select * from employee;
+    </select>
 </mapper>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,12 @@ public class AdminController {
     private EmployeeService employeeService;
     @Resource
     private TrainService trainService;
+    @Resource
+    private RewAndPunService rewAndPunService;
+    @Resource
+    private AttendanceService attendanceService;
+    @Resource
+    private SalaryService salaryService;
 
     @RequestMapping("/addRecruitMiddle")
     public String addRecruitMiddle(HttpSession session)throws Exception{
@@ -394,5 +401,59 @@ public class AdminController {
         List<Post>positions=postService.queryByDeptId(d);
         System.out.println(positions);
         return positions;
+    }
+    @RequestMapping("/calculateSalary")
+    public String calculateSalary(HttpSession session)throws Exception{
+        List<Employee>employees=employeeService.queryAll();
+        Calendar calendar=Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+        if (month==1){
+            month=12;
+            year-=1;
+        }else {
+            month-=1;
+        }
+        List<Salary>salaryList=salaryService.queryByYM(year,month);
+        if (salaryList.size()==0){
+            for (Employee employee:employees){
+                List<Attendance>attendances=attendanceService.queryByYM(year,month,employee.getId());
+                if (attendances.size()!=22){
+                    RewAndPun rewAndPun=new RewAndPun();
+                    rewAndPun.setMoney(employee.getBasicSalary()*(attendances.size()-22)/22);
+                    rewAndPun.setTime(year+"年"+month+"月");
+                    rewAndPun.setYear(year);
+                    rewAndPun.setMonth(month);
+                    if (attendances.size()<22){
+                        rewAndPun.setCause("缺勤"+(22-attendances.size())+"天");
+                    }else {
+                        rewAndPun.setCause("加班"+(attendances.size()-22)+"天");
+                    }
+                    rewAndPun.setEmployeeId(employee.getId());
+                    rewAndPunService.add(rewAndPun);
+                }
+                double rp=0;
+                List<RewAndPun>rewAndPuns=rewAndPunService.queryByEYM(employee.getId(),year,month);
+                for (RewAndPun rewAndPun:rewAndPuns){
+                    rp+=rewAndPun.getMoney();
+                }
+                Salary salary=new Salary();
+                salary.setBasic(employee.getBasicSalary());
+                salary.setBonus(employee.getBasicSalary()*0.3);
+                salary.setSocial(-employee.getBasicSalary()*0.15);
+                salary.setRewAndPun(rp);
+                salary.setYear(year);
+                salary.setMonth(month);
+                salary.setEmployeeId(employee.getId());
+                salaryService.add(salary);
+            }
+            /*String calculated="已结算上月工资";
+            session.setAttribute("calculated",calculated);*/
+            return "admin/adminSuccess";
+        }else {
+            /*String calculated="已结算过上月工资,不必重复结算";
+            session.setAttribute("calculated",calculated);*/
+            return "admin/adminSuccess";
+        }
     }
 }

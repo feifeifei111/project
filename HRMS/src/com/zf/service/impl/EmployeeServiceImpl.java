@@ -52,4 +52,9 @@ public class EmployeeServiceImpl implements EmployeeService{
     public List<Employee> queryByTrainId(int trainId) {
         return employeeMapper.queryByTrainId(trainId);
     }
+
+    @Override
+    public List<Employee> queryAll() {
+        return employeeMapper.queryAll();
+    }
 }

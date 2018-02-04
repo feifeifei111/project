@@ -48,6 +48,9 @@
             <c:if test="${attendance.endState==3}">
                 <td>旷工</td>
             </c:if>
+            <c:if test="${attendance.endState==0}">
+                <td>忘记打卡</td>
+            </c:if>
         </tr>
     </c:forEach>
 </table>

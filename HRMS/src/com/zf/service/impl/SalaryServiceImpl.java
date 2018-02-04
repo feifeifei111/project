@@ -6,6 +6,7 @@ import com.zf.service.SalaryService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class SalaryServiceImpl implements SalaryService{
@@ -23,7 +24,17 @@ public class SalaryServiceImpl implements SalaryService{
     }
 
     @Override
-    public Salary queryEYM(int employeeId, int year, int month) {
-        return salaryMapper.queryEYM(employeeId,year,month);
+    public List<Salary> queryByEmployeeId(int employeeId) {
+        return salaryMapper.queryByEmployeeId(employeeId);
+    }
+
+    @Override
+    public List<Salary> queryPageByEmployeeId(int employeeId, int currentRow, int pageSize) {
+        return salaryMapper.queryPageByEmployeeId(employeeId,currentRow,pageSize);
+    }
+
+    @Override
+    public List<Salary> queryByYM(int year, int month) {
+        return salaryMapper.queryByYM(year,month);
     }
 }

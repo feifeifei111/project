@@ -25,5 +25,6 @@
     </c:if>
     <a href="selectAttendance">查看打卡记录</a>
     <a href="selectRewAndPun">查看奖惩记录</a>
+    <a href="selectSalary">查看工资表</a>
 </body>
 </html>

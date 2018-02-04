@@ -14,6 +14,7 @@
 <head>
     <base href="<%=basePath%>"/>
     <title></title>
+    <script src="js/jquery-3.1.0.js"></script>
     <style>
         form{
             float: left;
@@ -24,8 +25,8 @@
 <form action="deptManagement" method="post">
     <input type="submit" value="部门管理">
 </form>
-<form>
-    <input type="submit" value="薪资管理">
+<form action="calculateSalary" method="post">
+    <input type="submit" id="in1" value="结算上月薪资">
 </form>
 <form>
     <input type="submit" value="考勤管理">

@@ -27,6 +27,8 @@ public class EmployController {
     private RewAndPunService rewAndPunService;
     @Resource
     private EmployeeService employeeService;
+    @Resource
+    private SalaryService salaryService;
 
     @RequestMapping("/signIn")
     public String signIn(HttpSession session)throws Exception{
@@ -36,8 +38,8 @@ public class EmployController {
         int year=calendar.get(Calendar.YEAR);
         //获得当前时间的月份，月份从0开始所以结果要加1
         int month=calendar.get(Calendar.MONTH)+1;
-        int days=calendar.getActualMaximum(Calendar.DATE);
-        double everydaySalary=employee.getBasicSalary()/days;
+//        int days=calendar.getActualMaximum(Calendar.DATE);获取当月天数
+        double everydaySalary=employee.getBasicSalary()/22;//一个月的工作天数直接按22天算
 
         Attendance attendance =new Attendance();
         Date date=new Date();
@@ -86,8 +88,7 @@ public class EmployController {
         Calendar calendar=Calendar.getInstance();
         int year=calendar.get(Calendar.YEAR);
         int month=calendar.get(Calendar.MONTH)+1;
-        int days=calendar.getActualMaximum(Calendar.DATE);
-        double everydaySalary=employee.getBasicSalary()/days;
+        double everydaySalary=employee.getBasicSalary()/22;
 
         Date date=new Date();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm");
@@ -128,14 +129,9 @@ public class EmployController {
                 rewAndPunService.add(rewAndPun1);
             }else {
                 if (rewAndPun.getMoney()==-50){
-                    RewAndPun rewAndPun1=new RewAndPun();
-                    rewAndPun1.setMoney(-50);
-                    rewAndPun1.setTime(t);
-                    rewAndPun1.setYear(year);
-                    rewAndPun1.setMonth(month);
-                    rewAndPun1.setCause("早退");
-                    rewAndPun1.setEmployeeId(employeeId);
-                    rewAndPunService.add(rewAndPun1);
+                    rewAndPun.setMoney(-100);
+                    rewAndPun.setCause("迟到+早退");
+                    rewAndPunService.update(rewAndPun);
                 }
             }
             attendance.setEndState(2);//早退
@@ -186,19 +182,8 @@ public class EmployController {
         if (month==1){
             year-=1;
             month=12;
-            List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
-            if (attendanceList.size()==0){
-                return "employee/currentMonthAttendance";
-            }
-            int totalRows = attendanceList.size();//得到总行数
-            int pageSize=10;
-            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
-            List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,0,pageSize);
-            session.setAttribute("attendances",attendances);
-            session.setAttribute("totalPages",totalPages);
-            session.setAttribute("year",year);
-            session.setAttribute("month",month);
-            return "employee/currentMonthAttendance";
+        }else {
+            month-=1;
         }
         List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
         if (attendanceList.size()==0){
@@ -222,19 +207,8 @@ public class EmployController {
         if (month==12){
             year+=1;
             month=1;
-            List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
-            if (attendanceList.size()==0){
-                return "employee/currentMonthAttendance";
-            }
-            int totalRows = attendanceList.size();//得到总行数
-            int pageSize=10;
-            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
-            List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,0,pageSize);
-            session.setAttribute("attendances",attendances);
-            session.setAttribute("totalPages",totalPages);
-            session.setAttribute("year",year);
-            session.setAttribute("month",month);
-            return "employee/currentMonthAttendance";
+        }else {
+            month+=1;
         }
         List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
         if (attendanceList.size()==0){
@@ -287,19 +261,8 @@ public class EmployController {
         if (month==1){
             year-=1;
             month=12;
-            List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
-            if (rewAndPunList.size()==0){
-                return "employee/currentMonthRewAndPun";
-            }
-            int totalRows = rewAndPunList.size();//得到总行数
-            int pageSize=10;
-            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
-            List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
-            session.setAttribute("rewAndPuns",rewAndPuns);
-            session.setAttribute("totalPages",totalPages);
-            session.setAttribute("year",year);
-            session.setAttribute("month",month);
-            return "employee/currentMonthRewAndPun";
+        }else {
+            month-=1;
         }
         List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
         if (rewAndPunList.size()==0){
@@ -323,19 +286,8 @@ public class EmployController {
         if (month==12){
             year+=1;
             month=1;
-            List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
-            if (rewAndPunList.size()==0){
-                return "employee/currentMonthRewAndPun";
-            }
-            int totalRows = rewAndPunList.size();//得到总行数
-            int pageSize=10;
-            int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
-            List<RewAndPun> rewAndPuns = rewAndPunService.queryPageByEYM(employeeId,year,month,0,pageSize);
-            session.setAttribute("rewAndPuns",rewAndPuns);
-            session.setAttribute("totalPages",totalPages);
-            session.setAttribute("year",year);
-            session.setAttribute("month",month);
-            return "employee/currentMonthRewAndPun";
+        }else {
+            month+=1;
         }
         List<RewAndPun> rewAndPunList=rewAndPunService.queryByEYM(employeeId,year,month);//得到所有要显示的数据
         if (rewAndPunList.size()==0){
@@ -350,5 +302,26 @@ public class EmployController {
         session.setAttribute("year",year);
         session.setAttribute("month",month);
         return "employee/currentMonthRewAndPun";
+    }
+    @RequestMapping("/selectSalary")
+    public String selectSalary(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        List<Salary> salaryList=salaryService.queryByEmployeeId(employeeId);//得到所有要显示的数据
+        int totalRows = salaryList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Salary> salaries = salaryService.queryPageByEmployeeId(employeeId,0,pageSize);
+        session.setAttribute("salaries",salaries);
+        session.setAttribute("totalPages",totalPages);
+        return "employee/listSalary";
+    }
+    @RequestMapping("/showSalary")
+    public String showSalary(int currentPage,HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int pageSize=10;
+        int currentRow=(currentPage-1)*pageSize;
+        List<Salary> salaries = salaryService.queryPageByEmployeeId(employeeId,currentRow,pageSize);
+        session.setAttribute("salaries",salaries);
+        return "employee/listSalary";
     }
 }

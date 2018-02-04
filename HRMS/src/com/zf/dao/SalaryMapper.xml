@@ -10,7 +10,13 @@
     <update id="update">
         update salary set basic = #{basic},bonus=#{bonus},social=#{social},rewAndPun=#{rewAndPun},year=#{year},month=#{month},employeeId=#{employeeId} where id=#{id};
     </update>
-    <select id="queryEYM" resultType="com.zf.model.Salary">
-        select * from salary where employeeid=#{employeeId} and year=#{year} and month=#{month};
+    <select id="queryByEmployeeId" resultType="com.zf.model.Salary">
+        select * from salary where employeeid=#{employeeId};
+    </select>
+    <select id="queryByYM" resultType="com.zf.model.Salary">
+        select * from salary where year=#{year} and month=#{month};
+    </select>
+    <select id="queryPageByEmployeeId" resultType="com.zf.model.Salary">
+        select * from salary where employeeid=#{employeeId} limit #{1},#{2};
     </select>
 </mapper>
