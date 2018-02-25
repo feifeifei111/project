@@ -180,10 +180,6 @@
             <div class="clear"></div>
         </div>
 
-
-
-
-
        <%-- <div class="rem-for-agile">
             <input type="checkbox" name="remember" class="remember">记得我
             　　

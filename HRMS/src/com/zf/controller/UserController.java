@@ -51,11 +51,13 @@ public class UserController {
                 int pageSize=3;
                 int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
                 List<Recruit> recruits = recruitService.queryPage(0,pageSize);
+                Resume resume=resumeService.queryUserId(user.getId());
                 session.setAttribute("recruits",recruits);
                 session.setAttribute("totalPages",totalPages);
                 session.setAttribute("userId",user.getId());
                 session.setAttribute("depts",deptService.queryAll());
                 session.setAttribute("posts",postService.queryAll());
+                session.setAttribute("resume",resume);
                 return "user/userSuccess";
             }else {
                 return "../../index";
@@ -153,7 +155,7 @@ public class UserController {
         resumeService.add(resume);
         return "user/userSuccess";
     }
-    @RequestMapping("/updateRusumeMiddle")
+    @RequestMapping("/updateResumeMiddle")
     public String updateRusumeMiddle(HttpSession session)throws Exception{
         return "user/updateResume";
     }
@@ -195,7 +197,13 @@ public class UserController {
         int userId= (int) session.getAttribute("userId");
         Resume resume=resumeService.queryUserId(userId);
         resume.setState(3);
-        session.setAttribute("resume",resume);
+        resumeService.update(resume);
+        Resume resume1=resumeService.queryUserId(userId);
+        session.setAttribute("resume",resume1);
         return "user/userSuccess";
+    }
+    @RequestMapping("/employeeLogin")
+    public String employeeLogin()throws Exception{
+        return "../../index";
     }
 }

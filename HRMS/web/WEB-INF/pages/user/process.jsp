@@ -32,6 +32,7 @@
 </c:if>
 <c:if test="${sessionScope.resume.state==4}">
     <p>您已被录用</p>
+    <a href="employeeLogin">员工登录</a>
 </c:if>
 </body>
 </html>

@@ -29,7 +29,7 @@
     </script>
 </head>
 <body>
-<a href="adminBack">返回</a>
+<a href="recruitPage">返回</a>
 <c:forEach items="${sessionScope.resumes}" var="resume">
     <c:forEach items="${sessionScope.depts}" var="dept">
         <c:forEach items="${sessionScope.posts}" var="post">

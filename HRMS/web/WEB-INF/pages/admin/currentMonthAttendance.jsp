@@ -1,0 +1,67 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: zf
+  Date: 2018/2/25
+  Time: 11:45
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
+<html>
+<head>
+    <base href="<%=basePath%>"/>
+    <title></title>
+</head>
+<body>
+<div style="margin: auto;width: 500px">
+    <a href="employeeMessage?postId=${sessionScope.postId}">返回</a>
+    <table border="1" cellspacing="0">
+        <caption>${sessionScope.year}年${sessionScope.month}月考勤表</caption>
+        <tr>
+            <th>签到时间</th>
+            <th>签到状态</th>
+            <th>签退时间</th>
+            <th>签退状态</th>
+        </tr>
+        <c:forEach items="${sessionScope.attendances}" var="attendance">
+            <tr>
+                <td><fmt:formatDate value="${attendance.beginTime}" type="both"/></td>
+                <c:if test="${attendance.beginState==1}">
+                    <td>正常</td>
+                </c:if>
+                <c:if test="${attendance.beginState==2}">
+                    <td>迟到</td>
+                </c:if>
+                <c:if test="${attendance.beginState==3}">
+                    <td>旷工</td>
+                </c:if>
+                <td><fmt:formatDate value="${attendance.endTime}" type="both"/></td>
+                <c:if test="${attendance.endState==1}">
+                    <td>正常</td>
+                </c:if>
+                <c:if test="${attendance.endState==2}">
+                    <td>早退</td>
+                </c:if>
+                <c:if test="${attendance.endState==3}">
+                    <td>旷工</td>
+                </c:if>
+                <c:if test="${attendance.endState==0}">
+                    <td>忘记打卡</td>
+                </c:if>
+            </tr>
+        </c:forEach>
+    </table>
+    <a href="ADbefore">上个月</a>&nbsp;&nbsp;
+    <c:forEach begin="1" end="${sessionScope.totalPages}" var="i">
+        <a href="ADshowAttendance?currentPage=${i}">${i}</a>
+    </c:forEach>&nbsp;&nbsp;
+    <a href="ADafter">下个月</a>
+</div>
+
+</body>
+</html>

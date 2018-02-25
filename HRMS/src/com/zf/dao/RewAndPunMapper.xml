@@ -14,9 +14,9 @@
         select * from rewandpun where employeeid=#{employeeId} and time=#{time};
     </select>
     <select id="queryByEYM" resultType="com.zf.model.RewAndPun">
-        select * from rewandpun where employeeid=#{employeeId} and year=#{year} and month=#{month};
+        select * from rewandpun where employeeid=#{0} and year=#{1} and month=#{2};
     </select>
     <select id="queryPageByEYM" resultType="com.zf.model.RewAndPun">
-        select * from rewandpun where employeeid=#{employeeId} and year=#{year} and month=#{month} limit #{3},#{4};
+        select * from rewandpun where employeeid=#{0} and year=#{1} and month=#{2} limit #{3},#{4};
     </select>
 </mapper>

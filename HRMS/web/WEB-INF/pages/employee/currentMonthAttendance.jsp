@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: zf
@@ -18,7 +19,7 @@
 </head>
 <body>
 <a href="employeeBack">返回</a>
-<table>
+<table border="1" cellspacing="0">
     <caption>${sessionScope.year}年${sessionScope.month}月考勤表</caption>
     <tr>
         <th>签到时间</th>
@@ -28,7 +29,7 @@
     </tr>
     <c:forEach items="${sessionScope.attendances}" var="attendance">
         <tr>
-            <td>${attendance.begintime}</td>
+            <td><fmt:formatDate value="${attendance.beginTime}" type="both"/></td>
             <c:if test="${attendance.beginState==1}">
                 <td>正常</td>
             </c:if>
@@ -38,7 +39,7 @@
             <c:if test="${attendance.beginState==3}">
                 <td>旷工</td>
             </c:if>
-            <td>${attendance.endTime}</td>
+            <td><fmt:formatDate value="${attendance.endTime}" type="both"/></td>
             <c:if test="${attendance.endState==1}">
                 <td>正常</td>
             </c:if>

@@ -1,16 +1,11 @@
 package com.zf.controller;
 
-import com.zf.model.Attendance;
-import com.zf.model.Employee;
-import com.zf.model.RewAndPun;
-import com.zf.model.Salary;
-import com.zf.service.AttendanceService;
-import com.zf.service.EmployeeService;
-import com.zf.service.RewAndPunService;
-import com.zf.service.SalaryService;
+import com.zf.model.*;
+import com.zf.service.*;
 import com.zf.util.DoPaging;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -29,6 +24,8 @@ public class EmployController {
     private EmployeeService employeeService;
     @Resource
     private SalaryService salaryService;
+    @Resource
+    private DissentService dissentService;
 
     @RequestMapping("/signIn")
     public String signIn(HttpSession session)throws Exception{
@@ -57,7 +54,7 @@ public class EmployController {
             rewAndPun.setTime(t);
             rewAndPun.setYear(year);
             rewAndPun.setMonth(month);
-            rewAndPun.setCause("旷工");
+            rewAndPun.setCause("Absenteeism");
             rewAndPun.setEmployeeId(employeeId);
             rewAndPunService.add(rewAndPun);
         }else if (date.getTime()-date1.getTime()>0){
@@ -67,7 +64,7 @@ public class EmployController {
             rewAndPun.setTime(t);
             rewAndPun.setYear(year);
             rewAndPun.setMonth(month);
-            rewAndPun.setCause("迟到");
+            rewAndPun.setCause("Late");
             rewAndPun.setEmployeeId(employeeId);
             rewAndPunService.add(rewAndPun);
         }else {
@@ -78,10 +75,12 @@ public class EmployController {
         attendance.setMonth(month);
         attendance.setEmployeeId(employeeId);
         attendanceService.add(attendance);
+        Attendance attend= attendanceService.queryByTodayEmployeeId(t,employee.getId());
+        session.setAttribute("attend",attend);
         return "employee/employeeSuccess";
     }
     @RequestMapping("/signOut")
-    public String signOut(int attendId,HttpSession session)throws Exception{
+    public String signOut(int attendId, HttpSession session)throws Exception{
         int employeeId= (int) session.getAttribute("employeeId");
         Employee employee=employeeService.queryById(employeeId);
         Attendance attendance = attendanceService.queryById(attendId);
@@ -106,12 +105,12 @@ public class EmployController {
                 rewAndPun1.setTime(t);
                 rewAndPun1.setYear(year);
                 rewAndPun1.setMonth(month);
-                rewAndPun1.setCause("旷工");
+                rewAndPun1.setCause("Absenteeism");
                 rewAndPun1.setEmployeeId(employeeId);
                 rewAndPunService.add(rewAndPun1);
             }else {
                 if (rewAndPun.getMoney()!=-everydaySalary){
-                    rewAndPun.setCause("旷工");
+                    rewAndPun.setCause("Absenteeism");
                     rewAndPun.setMoney(-everydaySalary);
                     rewAndPunService.update(rewAndPun);
                 }
@@ -124,13 +123,13 @@ public class EmployController {
                 rewAndPun1.setTime(t);
                 rewAndPun1.setYear(year);
                 rewAndPun1.setMonth(month);
-                rewAndPun1.setCause("早退");
+                rewAndPun1.setCause("Leave early");
                 rewAndPun1.setEmployeeId(employeeId);
                 rewAndPunService.add(rewAndPun1);
             }else {
                 if (rewAndPun.getMoney()==-50){
                     rewAndPun.setMoney(-100);
-                    rewAndPun.setCause("迟到+早退");
+                    rewAndPun.setCause("Late+Leave early");
                     rewAndPunService.update(rewAndPun);
                 }
             }
@@ -139,6 +138,8 @@ public class EmployController {
             attendance.setEndState(1);//正常打卡
         }
         attendanceService.update(attendance);
+        Attendance attend= attendanceService.queryByTodayEmployeeId(t,employee.getId());
+        session.setAttribute("attend",attend);
         return "employee/employeeSuccess";
     }
     @RequestMapping("/employeeBack")
@@ -322,6 +323,30 @@ public class EmployController {
         int currentRow=(currentPage-1)*pageSize;
         List<Salary> salaries = salaryService.queryPageByEmployeeId(employeeId,currentRow,pageSize);
         session.setAttribute("salaries",salaries);
+        return "employee/listSalary";
+    }
+    @RequestMapping("/dissentMiddle")
+    public String dissentMiddle(int year,int month,int salaryId,HttpSession session)throws Exception{
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        session.setAttribute("salaryId",salaryId);
+        return "employee/dissent";
+    }
+    @RequestMapping("/dissent")
+    public String dissent(String reason,double money,HttpSession session)throws Exception{
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        int salaryId= (int) session.getAttribute("salaryId");
+        int employeeId= (int) session.getAttribute("employeeId");
+        Dissent dissent=new Dissent();
+        dissent.setReason(reason);
+        dissent.setMoney(money);
+        dissent.setYear(year);
+        dissent.setMonth(month);
+        dissent.setEmployeeId(employeeId);
+        dissent.setSalaryId(salaryId);
+        dissent.setState(0);
+        dissentService.add(dissent);
         return "employee/listSalary";
     }
 }

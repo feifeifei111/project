@@ -5,20 +5,24 @@ import java.io.Serializable;
 public class Dissent implements Serializable {
     private int id;
     private String reason;
+    private double money;
+    private int year;
     private int month;
-    private Employee employee;
-    private Salary salary;
+    private int employeeId;
+    private int salaryId;
     private int state;
 
     public Dissent() {
     }
 
-    public Dissent(int id, String reason, int month, Employee employee, Salary salary, int state) {
+    public Dissent(int id, String reason, double money, int year, int month, int employeeId, int salaryId, int state) {
         this.id = id;
         this.reason = reason;
+        this.money = money;
+        this.year = year;
         this.month = month;
-        this.employee = employee;
-        this.salary = salary;
+        this.employeeId = employeeId;
+        this.salaryId = salaryId;
         this.state = state;
     }
 
@@ -38,6 +42,22 @@ public class Dissent implements Serializable {
         this.reason = reason;
     }
 
+    public double getMoney() {
+        return money;
+    }
+
+    public void setMoney(double money) {
+        this.money = money;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
     public int getMonth() {
         return month;
     }
@@ -46,20 +66,20 @@ public class Dissent implements Serializable {
         this.month = month;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 
-    public Salary getSalary() {
-        return salary;
+    public int getSalaryId() {
+        return salaryId;
     }
 
-    public void setSalary(Salary salary) {
-        this.salary = salary;
+    public void setSalaryId(int salaryId) {
+        this.salaryId = salaryId;
     }
 
     public int getState() {
@@ -75,9 +95,11 @@ public class Dissent implements Serializable {
         return "Dissent{" +
                 "id=" + id +
                 ", reason='" + reason + '\'' +
+                ", money=" + money +
+                ", year=" + year +
                 ", month=" + month +
-                ", employee=" + employee +
-                ", salary=" + salary +
+                ", employeeId=" + employeeId +
+                ", salaryId=" + salaryId +
                 ", state=" + state +
                 '}';
     }

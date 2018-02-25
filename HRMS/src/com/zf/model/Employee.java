@@ -10,6 +10,7 @@ public class Employee implements Serializable {
     private String birthday;
     private double basicSalary;
     private int state;
+    private String cause;
     private int postId;
     private int userId;
     private int trainId;
@@ -18,13 +19,14 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(int id, String name, String sex, String birthday,double basicSalary, int state, int postId, int userId, int trainId, Date createTime) {
+    public Employee(int id, String name, String sex, String birthday, double basicSalary, int state, String cause, int postId, int userId, int trainId, Date createTime) {
         this.id = id;
         this.name = name;
         this.sex = sex;
         this.birthday = birthday;
         this.basicSalary = basicSalary;
         this.state = state;
+        this.cause = cause;
         this.postId = postId;
         this.userId = userId;
         this.trainId = trainId;
@@ -79,6 +81,14 @@ public class Employee implements Serializable {
         this.state = state;
     }
 
+    public String getCause() {
+        return cause;
+    }
+
+    public void setCause(String cause) {
+        this.cause = cause;
+    }
+
     public int getPostId() {
         return postId;
     }
@@ -120,6 +130,7 @@ public class Employee implements Serializable {
                 ", birthday='" + birthday + '\'' +
                 ", basicSalary=" + basicSalary +
                 ", state=" + state +
+                ", cause='" + cause + '\'' +
                 ", postId=" + postId +
                 ", userId=" + userId +
                 ", trainId=" + trainId +

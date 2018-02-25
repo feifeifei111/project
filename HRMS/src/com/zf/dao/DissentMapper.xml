@@ -4,4 +4,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.DissentMapper">
 
+    <insert id="add">
+        insert into dissent (reason, money, year, month, employeeid, salaryid, state)
+        values (#{reason},#{money},#{year},#{month},#{employeeId},#{salaryId},#{state});
+    </insert>
+    <update id="update">
+        update dissent set reason = #{reason},money = #{money},year=#{year},month=#{month},employeeId=#{employeeId},salaryId=#{salaryId},state=#{state} where id=#{id};
+    </update>
+    <select id="queryByEmployId" resultType="com.zf.model.Dissent">
+        select * from dissent where employeeid=#{employeeId} and state=0;
+    </select>
+    <select id="queryById" resultType="com.zf.model.Dissent">
+        select * from dissent where id=#{id};
+    </select>
 </mapper>

@@ -5,11 +5,11 @@
 <mapper namespace="com.zf.dao.EmployeeMapper">
 
     <insert id="add">
-        insert into employee (name,sex,birthday,basicsalary,state, postid, userid, trainid, createtime)
-        values (#{name},#{sex},#{birthday},#{basicSalary},#{state},#{postId},#{userId},#{trainId},#{createTime});
+        insert into employee (name,sex,birthday,basicsalary,state,cause, postid, userid, trainid, createtime)
+        values (#{name},#{sex},#{birthday},#{basicSalary},#{state},#{cause},#{postId},#{userId},#{trainId},#{createTime});
     </insert>
     <update id="update">
-        update employee set name=#{name},sex=#{sex},birthday=#{birthday},basicSalary=#{basicSalary}, state = #{state},postId=#{postId},userId=#{userId},trainId=#{trainId},createTime=#{createTime} where id=#{id};
+        update employee set name=#{name},sex=#{sex},birthday=#{birthday},basicSalary=#{basicSalary}, state = #{state},cause=#{cause},postId=#{postId},userId=#{userId},trainId=#{trainId},createTime=#{createTime} where id=#{id};
     </update>
     <select id="queryById" resultType="com.zf.model.Employee">
         select * from employee where id=#{id};
@@ -21,7 +21,7 @@
         select * from employee where postid=#{postId};
     </select>
     <select id="queryPage" resultType="com.zf.model.Employee">
-        select * from employee where postid=#{postId} limit #{1},#{2};
+        select * from employee where postid=#{0} limit #{1},#{2};
     </select>
     <select id="queryByLikeName" resultType="com.zf.model.Employee">
         select * from employee where name like '${value}';

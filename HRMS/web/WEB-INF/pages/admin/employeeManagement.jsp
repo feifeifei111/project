@@ -42,63 +42,86 @@
                 })
             })
         })
+        function dismiss() {
+            var cause=prompt("请输入解聘原因","原因")
+            if (cause!=null&&cause!=""){
+                $("#cause").val(cause);
+                return true;
+            }else {
+                return false;
+            }
+        }
     </script>
 </head>
 <body>
-<c:forEach items="${sessionScope.employeeList}" var="employee">
-    <c:forEach items="${sessionScope.depts}" var="dept">
-        <c:forEach items="${sessionScope.posts}" var="post">
-            <c:if test="${employee.postId==post.id&&post.deptId==dept.id}">
-                <div style="float: left">
-                    <p>员工姓名：${employee.name}</p>
-                    <p>员工性别：${employee.sex}</p>
-                    <p>出生日期：${employee.birthday}</p>
-                    <p>员工部门：${dept.name}</p>
-                    <p>员工职位：${post.name}</p>
-                    <c:if test="${employee.state==1}">
-                        <p>员工状态：在职</p>
-                        <form action="changePost" method="post">
-                            部门：<select id="dept">
-                            <option value="0">请选择</option>
-                            <c:forEach items="${sessionScope.depts}" var="dp">
-                                <option value="0">${dp.name}</option>
-                            </c:forEach>
-                            </select>&nbsp;&nbsp;&nbsp;&nbsp;
-                                职位：<select id="position" name="postId">
+<a href="adminBack">返回主页</a>&nbsp;&nbsp;
+<a href="postManagement?deptId=${sessionScope.deptId}">返回上一页</a><br>
+    <c:forEach items="${sessionScope.employeeList}" var="employee">
+        <c:forEach items="${sessionScope.depts}" var="dept">
+            <c:forEach items="${sessionScope.posts}" var="post">
+                <c:if test="${employee.postId==post.id&&post.deptId==dept.id}">
+                    <div style="margin: 10px;background: lightgray;float: left;padding-left: 10px">
+                        <p>员工姓名：${employee.name}</p>
+                        <p>员工性别：${employee.sex}</p>
+                        <p>出生日期：${employee.birthday}</p>
+                        <p>员工部门：${dept.name}</p>
+                        <p>员工职位：${post.name}</p>
+                        <c:if test="${employee.state==1}">
+                            <p>员工状态：在职</p>
+
+                            <c:if test="${employee.trainId!=0}">
+                                <p>培训中</p>
+                            </c:if>
+                            <form action="changePost" method="post" style="padding-left: auto;text-align: center">
+                                部门：<select id="dept">
                                 <option value="0">请选择</option>
-                            </select><br>
-                            <input type="hidden" name="employeeId" value="${employee.id}">
-                            <input type="submit" value="换岗">
-                        </form>
-                        <form action="dismiss" method="post">
-                            <input type="hidden" name="employeeId" value="${employee.id}">
-                            <input type="submit" value="解聘">
-                        </form>
-                        <c:if test="${sessionScope.trainId==0}">
-                            <p>非培训状态</p>
-                            <form action="arrangeTrain" method="post">
+                                <c:forEach items="${sessionScope.depts}" var="dp">
+                                    <option value="${dp.id}">${dp.name}</option>
+                                </c:forEach>
+                                </select>&nbsp;&nbsp;
+                                职位：<select id="position" name="postId">
+                                    <option value="0">请选择</option>
+                                </select>
                                 <input type="hidden" name="employeeId" value="${employee.id}">
-                                <input type="submit" value="安排培训">
+                                <input type="submit" value="换岗">&nbsp;&nbsp;
+                            </form>
+                            <form action="selectEmployeeAttend" method="post" style="float: left">
+                                <input type="hidden" name="employeeId" value="${employee.id}">
+                                <input type="submit" value="查看考勤">&nbsp;&nbsp;
+                            </form>
+                            <form action="selectDissent" method="post" style="float: left">
+                                <input type="hidden" name="employeeId" value="${employee.id}">
+                                <input type="submit" value="查看复议">&nbsp;&nbsp;
+                            </form>
+                            <%--<form action="selectEmployeeRAP" method="post" style="float: left">
+                                <input type="hidden" name="employeeId" value="${employee.id}">
+                                <input type="submit" value="查看奖惩">&nbsp;
+                            </form>--%>
+                            <c:if test="${employee.trainId==0}">
+                                <form action="arrangeTrain" method="post" style="float: left">
+                                    <input type="hidden" name="employeeId" value="${employee.id}">
+                                    <input type="submit" value="安排培训">&nbsp;&nbsp;
+                                </form>
+                            </c:if>
+                            <form action="dismiss" method="post" onsubmit="return dismiss()">
+                                <input type="hidden" id="cause" name="cause">
+                                <input type="hidden" name="employeeId" value="${employee.id}">
+                                <input type="submit" value="解聘">
                             </form>
                         </c:if>
-                        <c:if test="${employee.trainId!=0}">
-                            <p>培训中</p>
+                        <c:if test="${employee.state==0}">
+                            <p>员工状态：离职</p>
+                            <p>离职原因：${employee.cause}</p>
                         </c:if>
-                    </c:if>
-                    <c:if test="${employee.state==0}">
-                        <p>员工状态：离职</p>
-                    </c:if>
-                </div>
-            </c:if>
+                    </div>
+                </c:if>
+            </c:forEach>
         </c:forEach>
     </c:forEach>
-</c:forEach>
-<c:forEach begin="1" end="${sessionScope.totalPages}" var="i">
-    <form style="float: left" action="showEmployee" method="post">
-        <input type="hidden" name="currentPage" value="${i}">
-        <input type="hidden" name="postId" value="${sessionScope.postId}">
-        <input type="submit" value="${i}">
-    </form>
-</c:forEach>
+<div style="clear: both">
+    <c:forEach begin="1" end="${sessionScope.totalPages}" var="i">
+        <a href="showEmployee?currentPage=${i}&postId=${sessionScope.postId}">${i}</a>
+    </c:forEach>
+</div>
 </body>
 </html>

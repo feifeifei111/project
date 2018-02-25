@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: zf
@@ -17,7 +18,7 @@
     <title></title>
 </head>
 <body>
-<a href="adminBack">返回</a>
+<a href="deptManagement">返回</a>
 <div>
     <form action="addPost" method="post">
         <input type="text" name="name" value="职位名称" required><br>
@@ -28,10 +29,10 @@
 </div>
 
 <c:forEach items="${sessionScope.posts}" var="post">
-    <div>
+    <div style="background: lightgray;margin: 10px;float: left">
         <p>职位名称：${post.name}</p>
-        <p>职位描述：${post.createTime}</p>
-        <p>创建时间：${post.createTime}</p>
+        <p>职位描述：${post.description}</p>
+        <p>创建时间：<fmt:formatDate value="${post.createTime}" type="date"/></p>
         <a href="deletePost?postId=${post.id}">删除职位</a>&nbsp;
         <a href="employeeMessage?postId=${post.id}">查看职位所有员工</a>
     </div>

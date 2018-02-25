@@ -17,7 +17,8 @@
     <title></title>
 </head>
 <body>
-<table>
+<a href="employeeMessage?postId=${sessionScope.postId}">返回</a>
+<table border="1" cellspacing="0">
     <tr>
         <th>培训名称</th>
         <th>培训内容</th>

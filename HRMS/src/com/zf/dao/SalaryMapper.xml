@@ -14,9 +14,9 @@
         select * from salary where employeeid=#{employeeId};
     </select>
     <select id="queryByYM" resultType="com.zf.model.Salary">
-        select * from salary where year=#{year} and month=#{month};
+        select * from salary where year=#{0} and month=#{1};
     </select>
     <select id="queryPageByEmployeeId" resultType="com.zf.model.Salary">
-        select * from salary where employeeid=#{employeeId} limit #{1},#{2};
+        select * from salary where employeeid=#{0} limit #{1},#{2};
     </select>
 </mapper>

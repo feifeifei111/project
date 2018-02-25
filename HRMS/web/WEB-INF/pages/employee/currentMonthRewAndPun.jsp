@@ -18,7 +18,7 @@
 </head>
 <body>
 <a href="employeeBack">返回</a>
-<table>
+<table border="1" cellspacing="0">
     <caption>${sessionScope.year}年${sessionScope.month}月奖惩表</caption>
     <tr>
         <th>奖惩金额</th>

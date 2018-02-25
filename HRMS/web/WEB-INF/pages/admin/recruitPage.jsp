@@ -19,23 +19,25 @@
         .d{
             float: left;
             margin: 10px;
+            background: lightgray;
         }
     </style>
 </head>
 <body>
-<a href="listResume">查看游客简历</a>
-<a href="addRecruitMiddle">添加招聘信息</a>
+<a href="adminBack">返回</a>&nbsp;&nbsp;
+<a href="listResume">查看游客简历</a>&nbsp;&nbsp;
+<a href="addRecruitMiddle">添加招聘信息</a><br>
 <c:forEach items="${sessionScope.recruits}" var="recruit">
     <c:forEach items="${sessionScope.depts}" var="dept">
         <c:forEach items="${sessionScope.posts}" var="post">
             <c:if test="${recruit.postId==post.id&&post.deptId==dept.id}">
                 <div class="d">
-                    <p>部门：${dept.name}</p>
-                    <p>职位：${post.name}</p>
-                    <p>职位需求：${recruit.requirement}</p>
-                    <p>工资待遇：${recruit.salaryRange}</p>
-                    <p>公司简介：${recruit.introduction}</p>
-                    <p>公司地址：${recruit.address}</p>
+                    <p><b style="color: cornflowerblue">部门：</b>${dept.name}</p>
+                    <p><b style="color: cornflowerblue">职位：</b>${post.name}</p>
+                    <p><b style="color: cornflowerblue">职位需求：</b>${recruit.requirement}</p>
+                    <p><b style="color: cornflowerblue">工资待遇：</b>${recruit.salary}</p>
+                    <p><b style="color: cornflowerblue">公司简介：</b>${recruit.introduction}</p>
+                    <p><b style="color: cornflowerblue">公司地址：</b>${recruit.address}</p>
                     <a href="updateRecruitMiddle?recruitId=${recruit.id}">修改招聘信息</a>&nbsp;
                     <a href="delete?recruitId=${recruit.id}">撤销发布</a>
                 </div>
@@ -43,8 +45,10 @@
         </c:forEach>
     </c:forEach>
 </c:forEach>
-<c:forEach begin="1" end="${sessionScope.totalPages}" var="i">
-    <a href="showRecruit?currentPage=${i}">${i}</a>
-</c:forEach>
+<div style="clear: both">
+    <c:forEach begin="1" end="${sessionScope.totalPages}" var="i">
+        <a href="showAdminRecruit?currentPage=${i}">${i}</a>
+    </c:forEach>
+</div>
 </body>
 </html>

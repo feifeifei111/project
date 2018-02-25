@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.zf.dao.RecruitMapper">
     <insert id="add">
-        insert into recruit (postid, requirement, salaryrange,introduction, address,createtime)
-        values (#{postId},#{requirement},#{salaryRange},#{introduction},#{address},#{createTime});
+        insert into recruit (postid, requirement, salary,introduction, address,createtime)
+        values (#{postId},#{requirement},#{salary},#{introduction},#{address},#{createTime});
     </insert>
     <update id="update">
-        update recruit set  requirement= #{requirement},salaryRange=#{salaryRange},introduction=#{introduction},address=#{address} where id=#{id};
+        update recruit set  requirement= #{requirement},salary=#{salary},introduction=#{introduction},address=#{address} where id=#{id};
     </update>
     <delete id="delete">
         delete from recruit where id=#{id};

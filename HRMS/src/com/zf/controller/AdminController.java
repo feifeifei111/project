@@ -36,6 +36,8 @@ public class AdminController {
     private AttendanceService attendanceService;
     @Resource
     private SalaryService salaryService;
+    @Resource
+    private DissentService dissentService;
 
     @RequestMapping("/addRecruitMiddle")
     public String addRecruitMiddle(HttpSession session)throws Exception{
@@ -54,6 +56,14 @@ public class AdminController {
         List<Recruit> recruits = recruitService.queryPage(0,pageSize);
         session.setAttribute("recruits",recruits);
         session.setAttribute("totalPages",totalPages);
+        return "admin/recruitPage";
+    }
+    @RequestMapping("/showAdminRecruit")
+    public String showAdminRecruit(int currentPage,HttpSession session)throws Exception{
+        int pageSize=3;
+        int currentRow=(currentPage-1)*pageSize;
+        List<Recruit> recruits = recruitService.queryPage(currentRow,pageSize);
+        session.setAttribute("recruits",recruits);
         return "admin/recruitPage";
     }
     @RequestMapping("/recruitPage")
@@ -170,6 +180,85 @@ public class AdminController {
         session.setAttribute("postId",postId);
         return "admin/employeeManagement";
     }
+    @RequestMapping("/selectEmployeeAttend")
+    public String selectEmployeeAttend(int employeeId,HttpSession session)throws Exception{
+        Calendar calendar=Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+
+        List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
+        int totalRows = attendanceList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,0,pageSize);
+        session.setAttribute("attendances",attendances);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        session.setAttribute("employeeId",employeeId);
+        return "admin/currentMonthAttendance";
+    }
+    @RequestMapping("/ADbefore")
+    public String ADbefore(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        if (month==1){
+            year-=1;
+            month=12;
+        }else {
+            month-=1;
+        }
+        List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
+        if (attendanceList.size()==0){
+            return "admin/currentMonthAttendance";
+        }
+        int totalRows = attendanceList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,0,pageSize);
+        session.setAttribute("attendances",attendances);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        return "admin/currentMonthAttendance";
+    }
+    @RequestMapping("/ADafter")
+    public String ADafter(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        if (month==12){
+            year+=1;
+            month=1;
+        }else {
+            month+=1;
+        }
+        List<Attendance> attendanceList=attendanceService.queryByYM(year,month,employeeId);//得到所有要显示的数据
+        if (attendanceList.size()==0){
+            return "admin/currentMonthAttendance";
+        }
+        int totalRows = attendanceList.size();//得到总行数
+        int pageSize=10;
+        int totalPages = DoPaging.getTotalPages(pageSize,totalRows);//得到总页数
+        List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,0,pageSize);
+        session.setAttribute("attendances",attendances);
+        session.setAttribute("totalPages",totalPages);
+        session.setAttribute("year",year);
+        session.setAttribute("month",month);
+        return "admin/currentMonthAttendance";
+    }
+    @RequestMapping("/ADshowAttendance")
+    public String ADshowAttendance(int currentPage,HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        int year= (int) session.getAttribute("year");
+        int month= (int) session.getAttribute("month");
+        int pageSize=10;
+        int currentRow=(currentPage-1)*pageSize;
+        List<Attendance> attendances = attendanceService.queryPageByYM(year,month,employeeId,currentRow,pageSize);
+        session.setAttribute("attendances",attendances);
+        return "admin/currentMonthAttendance";
+    }
     @RequestMapping("/showEmployee")
     public String showEmployee(int currentPage,int postId,HttpSession session)throws Exception{
         List<Employee> employeeList1 = employeeService.queryByPostId(postId);//得到所有要显示的数据
@@ -185,6 +274,47 @@ public class AdminController {
         session.setAttribute("postId",postId);
         return "admin/employeeManagement";
     }
+    @RequestMapping("/selectDissent")
+    public String selectDissent(int employeeId,HttpSession session)throws Exception{
+        List<Dissent> dissents=dissentService.queryByEmployId(employeeId);
+        session.setAttribute("dissents",dissents);
+        return "admin/listDissent";
+    }
+    @RequestMapping("/accept")
+    public String accept(int dissentId,HttpSession session)throws Exception{
+        Dissent dissent=dissentService.queryById(dissentId);
+        dissent.setState(1);
+        dissentService.update(dissent);
+        Dissent dissent1=dissentService.queryById(dissentId);
+
+        Calendar calendar=Calendar.getInstance();
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH)+1;
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+        String time=sdf.format(date);
+        RewAndPun rewAndPun=new RewAndPun();
+        rewAndPun.setMoney(dissent1.getMoney());
+        rewAndPun.setTime(time);
+        rewAndPun.setYear(year);
+        rewAndPun.setMonth(month);
+        rewAndPun.setCause(dissent1.getReason());
+        rewAndPun.setEmployeeId(dissent1.getEmployeeId());
+        rewAndPunService.add(rewAndPun);
+        List<Dissent> dissents=dissentService.queryByEmployId(dissent1.getEmployeeId());
+        session.setAttribute("dissents",dissents);
+        return "admin/listDissent";
+    }
+    @RequestMapping("/refuse")
+    public String refuse(int dissentId,HttpSession session)throws Exception{
+        Dissent dissent=dissentService.queryById(dissentId);
+        dissent.setState(2);
+        dissentService.update(dissent);
+        Dissent dissent1=dissentService.queryById(dissentId);
+        List<Dissent> dissents=dissentService.queryByEmployId(dissent1.getEmployeeId());
+        session.setAttribute("dissents",dissents);
+        return "admin/listDissent";
+    }
     @RequestMapping("/changePost")
     public String changePost(int employeeId,int postId,HttpSession session)throws Exception{
         Employee employee=employeeService.queryById(employeeId);
@@ -199,9 +329,10 @@ public class AdminController {
         return "admin/employeeManagement";
     }
     @RequestMapping("/dismiss")
-    public String dismiss(int employeeId,HttpSession session)throws Exception{
+    public String dismiss(int employeeId,String cause,HttpSession session)throws Exception{
         Employee employee=employeeService.queryById(employeeId);
         employee.setState(0);
+        employee.setCause(cause);
         employeeService.update(employee);
         Employee employee1=employeeService.queryById(employeeId);
         int pageSize=3;
@@ -300,12 +431,12 @@ public class AdminController {
             session.setAttribute("employees",employees);
             session.setAttribute("depts",deptService.queryAll());
             session.setAttribute("posts",postService.queryAll());
+            session.setAttribute("name",name);
             return "admin/listEmployee";
         }else {
             return "admin/deptManagement";
         }
     }
-
     @RequestMapping("/trainManagementMiddle")
     public String trainManagementMiddle(HttpSession session)throws Exception{
         session.setAttribute("trains",trainService.queryExist());
@@ -399,7 +530,6 @@ public class AdminController {
     @RequestMapping("/getPostByDept")
     public @ResponseBody List<Post> getPostByDept(int d)throws Exception{
         List<Post>positions=postService.queryByDeptId(d);
-        System.out.println(positions);
         return positions;
     }
     @RequestMapping("/calculateSalary")
@@ -421,13 +551,13 @@ public class AdminController {
                 if (attendances.size()!=22){
                     RewAndPun rewAndPun=new RewAndPun();
                     rewAndPun.setMoney(employee.getBasicSalary()*(attendances.size()-22)/22);
-                    rewAndPun.setTime(year+"年"+month+"月");
+                    rewAndPun.setTime(year+"-"+month);
                     rewAndPun.setYear(year);
                     rewAndPun.setMonth(month);
                     if (attendances.size()<22){
-                        rewAndPun.setCause("缺勤"+(22-attendances.size())+"天");
+                        rewAndPun.setCause("Absence from duty "+(22-attendances.size())+" days");
                     }else {
-                        rewAndPun.setCause("加班"+(attendances.size()-22)+"天");
+                        rewAndPun.setCause("Work overtime "+(attendances.size()-22)+" days");
                     }
                     rewAndPun.setEmployeeId(employee.getId());
                     rewAndPunService.add(rewAndPun);

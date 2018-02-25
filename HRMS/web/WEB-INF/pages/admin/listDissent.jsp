@@ -2,8 +2,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: zf
-  Date: 2018/1/31
-  Time: 22:11
+  Date: 2018/2/25
+  Time: 21:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -17,29 +17,27 @@
     <title></title>
 </head>
 <body>
-<a href="deptManagement">返回</a>
+<a href="employeeMessage?postId=${sessionScope.postId}">返回</a><br>
 <table border="1" cellspacing="0">
+    <caption>复议表</caption>
     <tr>
-        <th>培训名称</th>
-        <th>培训内容</th>
-        <th>起始时间</th>
-        <th>结束时间</th>
+        <th>复议原因</th>
+        <th>金额</th>
+        <th>日期</th>
         <th></th>
     </tr>
-    <c:forEach items="${sessionScope.trains}" var="train">
+    <c:forEach items="${sessionScope.dissents}" var="dissent">
         <tr>
-            <td>${train.name}</td>
-            <td>${train.content}</td>
-            <td>${train.beginTime}</td>
-            <td>${train.endTime}</td>
+            <td>${dissent.reason}</td>
+            <td>${dissent.money}</td>
+            <td>${dissent.year}年${dissent.month}月</td>
             <td>
-                <form action="addDeptTrain" method="post">
-                    <input type="hidden" name="trainId" value="${train.id}">
-                    <input type="submit" value="选择">
-                </form>
+                <a href="accept?dissentId=${dissent.id}">同意复议</a>&nbsp;
+                <a href="refuse?dissentId=${dissent.id}">拒绝复议</a>
             </td>
         </tr>
     </c:forEach>
+
 </table>
 </body>
 </html>

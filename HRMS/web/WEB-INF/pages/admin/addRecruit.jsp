@@ -44,23 +44,32 @@
             })
         })
     </script>
+    <style>
+        div{
+            margin: auto;
+            width: 500px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<form action="addRecruit" method="post">
-    部门：<select id="dept">
-    <option value="0">请选择</option>
-    <c:forEach items="${sessionScope.depts}" var="dp">
-        <option value="${dp.id}">${dp.name}</option>
-    </c:forEach>
-</select>&nbsp;&nbsp;&nbsp;&nbsp;
-    职位：<select id="position" name="postId">
-    <option value="0">请选择</option>
-</select><br>
-    职位要求：<input type="text" name="requirement"><br>
-    薪资待遇：<input type="text" name="salary"><br>
-    公司简介：<input type="text" name="introduction"><br>
-    公司地址：<input type="text" name="address"><br>
-    <input type="submit" value="发布">
-</form>
+<div>
+    <form action="addRecruit" method="post">
+        部门：<select id="dept">
+        <option value="0">请选择</option>
+        <c:forEach items="${sessionScope.depts}" var="dp">
+            <option value="${dp.id}">${dp.name}</option>
+        </c:forEach>
+    </select>&nbsp;&nbsp;&nbsp;&nbsp;
+        职位：<select id="position" name="postId">
+        <option value="0">请选择</option>
+    </select><br>
+        职位要求：<input type="text" name="requirement"><br>
+        薪资待遇：<input type="text" name="salary"><br>
+        公司简介：<input type="text" name="introduction"><br>
+        公司地址：<input type="text" name="address"><br>
+        <input type="submit" value="发布">
+    </form>
+</div>
 </body>
 </html>

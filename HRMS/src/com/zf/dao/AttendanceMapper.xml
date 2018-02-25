@@ -14,12 +14,12 @@
         select * from attendance where today=#{today} and employeeId=#{employeeId};
     </select>
     <select id="queryByYM" resultType="com.zf.model.Attendance">
-        select * from attendance where year=#{year} and month=#{month} and employeeId=#{employeeId};
+        select * from attendance where year=#{0} and month=#{1} and employeeId=#{2};
     </select>
     <select id="queryById" resultType="com.zf.model.Attendance">
         select * from attendance where id=#{id};
     </select>
     <select id="queryPageByYM" resultType="com.zf.model.Attendance">
-        select * from attendance where year=#{year} and month=#{month} and employeeId=#{employeeId} limit #{3},#{4};
+        select * from attendance where year=#{0} and month=#{1} and employeeId=#{2} limit #{3},#{4};
     </select>
 </mapper>

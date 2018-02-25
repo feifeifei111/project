@@ -20,7 +20,7 @@
     <c:if test="${sessionScope.attend==null}">
         <a href="signIn">签到</a>
     </c:if>
-    <c:if test="${sessionScope.attend.beginState==1&&sessionScope.attend.endState==0}">
+    <c:if test="${sessionScope.attend.endState==0}">
         <a href="signOut?attendId=${sessionScope.attend.id}">签退</a>
     </c:if>
     <a href="selectAttendance">查看打卡记录</a>

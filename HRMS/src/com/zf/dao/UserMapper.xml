@@ -5,7 +5,7 @@
 <mapper namespace="com.zf.dao.UserMapper">
 
     <insert id="addUser">
-        insert into user (name,pass,sex,age,phone,email) values (#{name},#{pass},#{sex},#{age},#{phone},#{email});
+        insert into user (name,pass,sex,age,phone,email,createtime) values (#{name},#{pass},#{sex},#{age},#{phone},#{email},#{createTime});
     </insert>
     <select id="queryByName" resultType="com.zf.model.User">
         select * from user where name=#{name};
