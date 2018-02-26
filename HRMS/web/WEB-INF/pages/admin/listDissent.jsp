@@ -17,27 +17,28 @@
     <title></title>
 </head>
 <body>
-<a href="employeeMessage?postId=${sessionScope.postId}">返回</a><br>
-<table border="1" cellspacing="0">
-    <caption>复议表</caption>
-    <tr>
-        <th>复议原因</th>
-        <th>金额</th>
-        <th>日期</th>
-        <th></th>
-    </tr>
-    <c:forEach items="${sessionScope.dissents}" var="dissent">
+<div style="width: 500px;margin: auto">
+    <a href="employeeMessage?postId=${sessionScope.postId}">返回</a><br>
+    <table border="1" cellspacing="0">
+        <caption>复议表</caption>
         <tr>
-            <td>${dissent.reason}</td>
-            <td>${dissent.money}</td>
-            <td>${dissent.year}年${dissent.month}月</td>
-            <td>
-                <a href="accept?dissentId=${dissent.id}">同意复议</a>&nbsp;
-                <a href="refuse?dissentId=${dissent.id}">拒绝复议</a>
-            </td>
+            <th>复议原因</th>
+            <th>金额</th>
+            <th>日期</th>
+            <th></th>
         </tr>
-    </c:forEach>
-
-</table>
+        <c:forEach items="${sessionScope.dissents}" var="dissent">
+            <tr>
+                <td>${dissent.reason}</td>
+                <td>${dissent.money}</td>
+                <td>${dissent.year}年${dissent.month}月</td>
+                <td>
+                    <a href="accept?dissentId=${dissent.id}">同意复议</a>&nbsp;
+                    <a href="refuse?dissentId=${dissent.id}">拒绝复议</a>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>

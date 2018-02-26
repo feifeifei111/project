@@ -23,7 +23,6 @@
     </style>
 </head>
 <body>
-<div style="margin: auto;width: 500px">
     <a href="adminBack">返回</a><br>
     <form action="addDept" method="post" style="float: left">
         <input type="text" name="name" value="部门名称" required>
@@ -42,8 +41,5 @@
             <a href="arrangeDeptTrain?deptId=${dept.id}">安排部门员工培训</a>
         </div>
     </c:forEach>
-</div>
-
-
 </body>
 </html>

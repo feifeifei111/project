@@ -51,6 +51,15 @@
                 return false;
             }
         }
+        function basic() {
+            var basic=prompt("请输入基础工资","基础工资")
+            if (basic!=null&&basic!=""){
+                $("#basicSalary").val(basic);
+                return true;
+            }else {
+                return false;
+            }
+        }
     </script>
 </head>
 <body>
@@ -72,7 +81,7 @@
                             <c:if test="${employee.trainId!=0}">
                                 <p>培训中</p>
                             </c:if>
-                            <form action="changePost" method="post" style="padding-left: auto;text-align: center">
+                            <form action="changePost" method="post" style="padding-left: auto;text-align: center" onsubmit="return basic()">
                                 部门：<select id="dept">
                                 <option value="0">请选择</option>
                                 <c:forEach items="${sessionScope.depts}" var="dp">
@@ -83,6 +92,7 @@
                                     <option value="0">请选择</option>
                                 </select>
                                 <input type="hidden" name="employeeId" value="${employee.id}">
+                                <input type="hidden" id="basicSalary" name="basicSalary">
                                 <input type="submit" value="换岗">&nbsp;&nbsp;
                             </form>
                             <form action="selectEmployeeAttend" method="post" style="float: left">

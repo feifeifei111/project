@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -26,6 +27,12 @@ public class EmployController {
     private SalaryService salaryService;
     @Resource
     private DissentService dissentService;
+    @Resource
+    private DeptService deptService;
+    @Resource
+    private PostService postService;
+    @Resource
+    private TrainService trainService;
 
     @RequestMapping("/signIn")
     public String signIn(HttpSession session)throws Exception{
@@ -348,5 +355,36 @@ public class EmployController {
         dissent.setState(0);
         dissentService.add(dissent);
         return "employee/listSalary";
+    }
+    @RequestMapping("/selfMessage")
+    public String selfMessage(HttpSession session)throws Exception{
+        int employeeId= (int) session.getAttribute("employeeId");
+        Employee employee=employeeService.queryById(employeeId);
+        List<Dept> depts=deptService.queryAll();
+        List<Post> posts=postService.queryAll();
+        List<Train> trains=trainService.queryExist();
+        session.setAttribute("employee",employee);
+        session.setAttribute("depts",depts);
+        session.setAttribute("posts",posts);
+        session.setAttribute("trains",trains);
+        return "employee/selfMessage";
+    }
+    @RequestMapping("/signOutAJAX")
+    public void signOutAJAX(HttpServletResponse response)throws Exception{
+
+        Date date=new Date();
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm");
+        SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
+        String time=sdf1.format(date)+" 17:00";
+        Date date1=sdf.parse(time);
+        String t=sdf1.format(date);
+
+        if (date1.getTime()-date.getTime()>10800000){
+            response.getWriter().print("sure absenteeism?");
+        }else if (date1.getTime()-date.getTime()>0){
+            response.getWriter().print("sure leave early?");
+        }else {
+            response.getWriter().print("sure signOut?");
+        }
     }
 }

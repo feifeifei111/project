@@ -316,9 +316,10 @@ public class AdminController {
         return "admin/listDissent";
     }
     @RequestMapping("/changePost")
-    public String changePost(int employeeId,int postId,HttpSession session)throws Exception{
+    public String changePost(int employeeId,int postId,double basicSalary,HttpSession session)throws Exception{
         Employee employee=employeeService.queryById(employeeId);
         employee.setPostId(postId);
+        employee.setBasicSalary(basicSalary);//直接改工资有bug...
         employeeService.update(employee);
         List<Employee> employeeList1 = employeeService.queryByPostId(postId);//得到所有要显示的数据
         int totalRows = employeeList1.size();//得到总行数

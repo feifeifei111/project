@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../../../css/style.css">
     <script>
         $(function () {
-            $("#f_tags").blur(function () {
+            $("#name").blur(function () {
                 $.ajax({
                     url:"nameAJAX",
                     type:"post",
@@ -26,7 +26,7 @@
                     success:function (data) {
                         $("#p").html(data)
                         $("#p").css("color","blue")
-                        if (data=="账户名已存在"){
+                        if (data=="username is exist"){
                             $("#sub").attr("type","button")
                         }else {
                             $("#sub").attr("type","submit")
@@ -64,7 +64,7 @@
             $("#name").blur(function () {
                 var reg=/^[a-zA-Z][a-zA-Z0-9_]{1,15}$/;
                 var value=$("#name").val();
-                if(reg.test(value)&&value!=""&&value!=null){
+                if(reg.test(value)&&value!=""){
                     $("#p1").html("√");
                     $("#p1").css("color","green");
                     x=true;
@@ -187,7 +187,7 @@
             <a href="#">忘记了密码</a><br>
         </div>--%>
         <div class="login-w3">
-            <input type="submit" class="login" value="注册">
+            <input type="button" id="sub" class="login" value="注册">
         </div>
         <div class="clear"></div>
     </form>

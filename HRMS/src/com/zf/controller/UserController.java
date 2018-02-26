@@ -38,7 +38,9 @@ public class UserController {
     public void nameAJAX(String name, HttpServletResponse response)throws Exception{
         User user=userService.queryByName(name);
         if (user!=null){
-            response.getWriter().print("账户名已存在");
+            response.getWriter().print("username is exist");
+        }else {
+            response.getWriter().print("ok");
         }
     }
     @RequestMapping("/login")

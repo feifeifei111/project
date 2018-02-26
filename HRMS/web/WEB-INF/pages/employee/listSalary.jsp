@@ -74,6 +74,7 @@
                     <input type="hidden" name="salaryId" value="${salary.id}">
                     <input type="submit" value="申请复议">
                 </form>
+
                 <%--<a href="javascript:void (0)" onclick="document.getElementById('light').style.display='block';
                  document.getElementById('fade').style.display='block'">申请复议</a>
                 <div id="light" class="white_content">
